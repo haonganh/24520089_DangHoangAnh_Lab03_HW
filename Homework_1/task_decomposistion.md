@@ -70,11 +70,11 @@ Lab03_Repo/
 
 **T01. Create and verify the independent project** — Priority: Critical
 
-- [ ] Create/clone the dedicated Lab 3 Git repository.
-- [ ] Create `Homework_1/app/` with React and TypeScript (Vite is recommended, not required).
-- [ ] Confirm Git's root and `remote.origin.url` point to **Lab 3**, not Lab 2.
-- [ ] Add these two planning documents before implementation.
-- [ ] Define commands for dev, build, lint, and test, as applicable.
+- [x] Create/clone the dedicated Lab 3 Git repository.
+- [x] Create `Homework_1/app/` with React and TypeScript (Vite is recommended, not required).
+- [x] Confirm Git's root and `remote.origin.url` point to **Lab 3**, not Lab 2.
+- [x] Add these two planning documents before implementation.
+- [x] Define commands for dev, build, lint, and test, as applicable.
 
 **Acceptance:** The project runs locally, a production build succeeds, and the Git remote is the Lab 3 repository.
 
