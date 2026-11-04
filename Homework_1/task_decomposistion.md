@@ -122,12 +122,12 @@ Lab03_Repo/
 
 **T05. Implement sound playback** — Priority: High
 
-- [ ] Load the seven audio samples without unnecessary network requests or blocking initial interaction.
-- [ ] Start/resume the audio context only following a user gesture when required by browser policy.
-- [ ] Allow rapid *distinct* key hits without unwanted sound cut-offs.
-- [ ] Add safe default output gain; prevent excessively loud/clipped output.
-- [ ] Handle missing/invalid samples gracefully and expose a readable error message.
-- [ ] Stop/release resources and event handlers during cleanup.
+- [x] Load the seven audio samples without unnecessary network requests or blocking initial interaction.
+- [x] Start/resume the audio context only following a user gesture when required by browser policy.
+- [x] Allow rapid *distinct* key hits without unwanted sound cut-offs.
+- [x] Add safe default output gain; prevent excessively loud/clipped output.
+- [x] Handle missing/invalid samples gracefully and expose a readable error message.
+- [x] Stop/release resources and event handlers during cleanup.
 
 **Acceptance:** Each of the seven controls plays its intended sound, errors do not crash the page, and basic repeated interaction remains responsive.
 
