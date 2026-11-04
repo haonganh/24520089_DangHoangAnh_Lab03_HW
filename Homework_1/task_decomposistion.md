@@ -135,11 +135,18 @@ Lab03_Repo/
 
 **T06. Create the visible hit log** — Priority: Critical
 
-- [ ] Render a labeled hit history in an `<output aria-live="polite">` region as requested.
-- [ ] Record meaningful text such as pad name and time/order, not only decorative icons.
-- [ ] Bound the stored history (e.g., last 10–20 entries) to avoid unbounded growth.
-- [ ] Avoid overwhelming screen-reader users during fast sequences: provide concise status updates and assess an announcement-throttling strategy while keeping the visible history complete.
-- [ ] Do not move keyboard focus when a new hit is logged.
+- [x] Render a labeled hit history in an `<output aria-live="polite">` region as requested.
+- [x] Record meaningful text such as pad name and time/order, not only decorative icons.
+- [x] Bound the stored history (e.g., last 10–20 entries) to avoid unbounded growth.
+- [x] Avoid overwhelming screen-reader users during fast sequences: provide concise status updates and assess an announcement-throttling strategy while keeping the visible history complete.
+- [x] Do not move keyboard focus when a new hit is logged.
+**Lab 2 HW1 Reuse Evidence**
+
+- [x] Adapted the accessible status pattern from DataGrid.tsx.
+- [x] Reused role="status" and aria-atomic="true".
+- [x] Implemented polite live announcements.
+- [x] Preserved keyboard focus during dynamic updates.
+- [x] Added announcement throttling for rapid drum hits.
 
 **Acceptance:** New hits are visible; screen-reader announcements are meaningful, polite, and do not interrupt focus or flood speech output.
 
