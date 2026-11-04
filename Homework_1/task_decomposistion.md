@@ -152,24 +152,24 @@ Lab03_Repo/
 
 **T07. Create the decibel/signal-level display** — Priority: High
 
-- [ ] Render a visible level meter near the drum pads.
-- [ ] Prefer a real output-signal measurement using `AnalyserNode`/RMS, displayed as **dBFS** (digital full-scale decibels), not as physical sound-pressure level in dB SPL.
-- [ ] Display an accessible numeric/text equivalent of the meaningful meter value; do not rely only on color or animation.
-- [ ] Use semantic markup such as `<meter>` when its range and meaning are well defined.
-- [ ] Limit visual update frequency and respect `prefers-reduced-motion` for nonessential animations.
-- [ ] Do not announce every animation frame through a live region.
+- [x] Render a visible level meter near the drum pads.
+- [x] Prefer a real output-signal measurement using `AnalyserNode`/RMS, displayed as **dBFS** (digital full-scale decibels), not as physical sound-pressure level in dB SPL.
+- [x] Display an accessible numeric/text equivalent of the meaningful meter value; do not rely only on color or animation.
+- [x] Use semantic markup such as `<meter>` when its range and meaning are well defined.
+- [x] Limit visual update frequency and respect `prefers-reduced-motion` for nonessential animations.
+- [x] Do not announce every animation frame through a live region.
 
 **Acceptance:** The meter reacts to audio activity, has meaningful labels and bounds, and does not produce excessive assistive-technology announcements. If values are illustrative rather than measured, label them honestly.
 
 **T08. Design responsive, perceivable UI** — Priority: High
 
-- [ ] Provide a descriptive page title, one `<h1>`, logical section headings, and instructions for keyboard and mouse/touch operation.
-- [ ] Maintain text contrast **at least 4.5:1** for normal text and **3:1** for large text.
-- [ ] Maintain **3:1** non-text contrast for essential pad boundaries, state markers, and meaningful meter graphics.
-- [ ] Use clear `:focus-visible` styling; focus must not be fully obscured by author content.
-- [ ] Target at least **24×24 CSS px** for pointer targets (prefer 44×44 px as a design goal).
-- [ ] Support 320 CSS px equivalent viewport width, 200% text resize, and 400% zoom/reflow without loss of essential functionality.
-- [ ] Ensure feedback does not depend exclusively on color, shape, sound, or animation.
+- [x] Provide a descriptive page title, one `<h1>`, logical section headings, and instructions for keyboard and mouse/touch operation.
+- [x] Maintain text contrast **at least 4.5:1** for normal text and **3:1** for large text.
+- [x] Maintain **3:1** non-text contrast for essential pad boundaries, state markers, and meaningful meter graphics.
+- [x] Use clear `:focus-visible` styling; focus must not be fully obscured by author content.
+- [x] Target at least **24×24 CSS px** for pointer targets (prefer 44×44 px as a design goal).
+- [x] Support 320 CSS px equivalent viewport width, 200% text resize, and 400% zoom/reflow without loss of essential functionality.
+- [x] Ensure feedback does not depend exclusively on color, shape, sound, or animation.
 
 **Acceptance:** All controls and feedback remain usable with keyboard-only navigation, zoom, and small screens.
 
@@ -177,23 +177,23 @@ Lab03_Repo/
 
 **T09. Add targeted behavior tests** — Priority: Critical
 
-- [ ] Test all seven `code` mappings.
-- [ ] Test one physical key held down with repeated `keydown` events.
-- [ ] Test behavior when `input`, `textarea`, `select`, and `contenteditable` contain focus.
-- [ ] Test `Ctrl`/`Alt`/`Meta` combinations and IME composition.
-- [ ] Test shortcut scope/on-off behavior under WCAG 2.1.4.
-- [ ] Test pointer, `Tab`, `Enter`, and `Space` activation.
-- [ ] Test release on `keyup`, focus loss, visibility change, and unmount.
-- [ ] Test missing audio file, blocked playback, and rapid distinct hits.
-- [ ] Test log history limit and meter labels.
+- [] Test all seven `code` mappings.
+- [] Test one physical key held down with repeated `keydown` events.
+- [] Test behavior when `input`, `textarea`, `select`, and `contenteditable` contain focus.
+- [] Test `Ctrl`/`Alt`/`Meta` combinations and IME composition.
+- [] Test shortcut scope/on-off behavior under WCAG 2.1.4.
+- [] Test pointer, `Tab`, `Enter`, and `Space` activation.
+- [] Test release on `keyup`, focus loss, visibility change, and unmount.
+- [] Test missing audio file, blocked playback, and rapid distinct hits.
+- [] Test log history limit and meter labels.
 
 **Acceptance:** All scripted tests pass; any remaining limitation is explicitly documented.
 
 **T10. Run accessibility verification** — Priority: Critical
 
-- [ ] Run axe or equivalent automated accessibility checks and resolve actionable findings.
-- [ ] Run Lighthouse against the **production build** and capture category scores, environment, and date.
-- [ ] Aim for **Lighthouse Accessibility 100/100**; do not infer WCAG conformance from a score alone.
+- [] Run axe or equivalent automated accessibility checks and resolve actionable findings.
+- [] Run Lighthouse against the **production build** and capture category scores, environment, and date.
+- [] Aim for **Lighthouse Accessibility 100/100**; do not infer WCAG conformance from a score alone.
 - [ ] Manually test keyboard-only use, focus order, focus visibility, keyboard exit, shortcut scope, and live announcements.
 - [ ] Test with at least one screen reader/browser pairing if available (e.g., NVDA + Chrome, VoiceOver + Safari).
 - [ ] Verify text/non-text contrast, text resizing, zoom/reflow, reduced motion, and accessible target sizes.
