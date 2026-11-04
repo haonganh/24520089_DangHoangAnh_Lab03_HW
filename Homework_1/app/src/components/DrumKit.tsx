@@ -39,11 +39,13 @@ export default function DrumKit() {
 
       if (count === 0) return;
 
-      setAnnouncement(
-        count === 1
-          ? `${latest} drum triggered.`
-          : `${count} drum hits triggered. Latest: ${latest}.`
-      );
+     const latestHitId = hitIdRef.current;
+
+setAnnouncement(
+  count === 1
+    ? `Hit ${latestHitId}: ${latest} drum triggered.`
+    : `${count} drum hits triggered. Latest: ${latest}. Hit ${latestHitId}.`
+);
 
       pendingRef.current = { count: 0, latest: '' };
     }, 1200);

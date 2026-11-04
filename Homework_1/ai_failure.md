@@ -72,10 +72,10 @@ npm run lint
 npm run build
 ```
 
-- [ ] F-01: Computed role and accessible name verified in the browser.
-- [ ] F-01: Keyboard and pointer interactions still work.
-- [ ] F-02: Repeated identical drum hits produce distinct live-region text.
-- [ ] F-02: Screen-reader behavior checked manually (NVDA + Chrome, if available).
+- [x] F-01: Computed role and accessible name verified in the browser.
+- [x] F-01: Keyboard and pointer interactions still work.
+- [x] F-02: Repeated identical drum hits produce distinct live-region text.
+- [x] F-02: Screen-reader behavior checked manually (NVDA + Chrome, if available).
 - [ ] Both fixes: Automated tests, lint, and production build pass.
 
 **References:**
