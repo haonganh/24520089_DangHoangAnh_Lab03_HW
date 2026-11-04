@@ -204,10 +204,10 @@ Lab03_Repo/
 **T11. Document and submit** — Priority: High
 
 
-- [ ] Include design decisions for shortcut handling and `aria-pressed` semantics.
-- [ ] Add evidence/screenshots for desktop, mobile, keyboard focus, and audit results as appropriate.
-- [ ] Commit Lab 3 work to the Lab 3 repository only.
-- [ ] Confirm `Homework_1/` is independently runnable and does not depend on files from the Lab 2 checkout.
+- [x] Include design decisions for shortcut handling and `aria-pressed` semantics.
+- [x] Add evidence/screenshots for desktop, mobile, keyboard focus, and audit results as appropriate.
+- [x] Commit Lab 3 work to the Lab 3 repository only.
+- [x] Confirm `Homework_1/` is independently runnable and does not depend on files from the Lab 2 checkout.
 
 **Acceptance:** A reviewer can clone the Lab 3 repository, run HW1, verify the controls, and inspect the accessibility evidence.
 
@@ -257,13 +257,13 @@ This is the **high-priority subset** for this app, not an exhaustive list of all
 
 ## 6. Definition of done
 
-- [ ] All slide-specified features work: physical-code shortcuts, repeat prevention, input isolation, accessible buttons, hit log, and visual meter.
-- [ ] All relevant WCAG 2.2 Level A and AA requirements have been checked, including **2.1.4**.
-- [ ] The `aria-pressed` design decision is justified against WAI-ARIA toggle-button semantics.
-- [ ] Audio/interaction failures are handled gracefully.
-- [ ] Targeted tests, production build, accessibility audit, and manual checks are complete.
-- [ ] Lighthouse Accessibility score is recorded; 100/100 is a target, never a fabricated claim.
-- [ ] HW1 is self-contained under `Homework_1/` in the **separate Lab 3 repository**.
+- [x] All slide-specified features work: physical-code shortcuts, repeat prevention, input isolation, accessible buttons, hit log, and visual meter.
+- [x] All relevant WCAG 2.2 Level A and AA requirements have been checked, including **2.1.4**.
+- [x] The `aria-pressed` design decision is justified against WAI-ARIA toggle-button semantics.
+- [x] Audio/interaction failures are handled gracefully.
+- [x] Targeted tests, production build, accessibility audit, and manual checks are complete.
+- [x] Lighthouse Accessibility score is recorded; 100/100 is a target, never a fabricated claim.
+- [x] HW1 is self-contained under `Homework_1/` in the **separate Lab 3 repository**.
 
 ## 7. Authoritative references
 
