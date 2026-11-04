@@ -105,13 +105,19 @@ Lab03_Repo/
 
 **T04. Implement accessible pad activation** — Priority: Critical
 
-- [ ] Use native `<button type="button">` controls.
-- [ ] Include the instrument name and printed key in the accessible name, e.g., “Kick drum, W”.
-- [ ] Preserve native `Tab`, `Enter`, and `Space` behavior.
-- [ ] Ensure pointer activation and physical keyboard activation share the same sound/logging pipeline and do not double-fire.
-- [ ] Represent an active visual state using more than a color change.
-- [ ] Review the slide's `aria-pressed={isActive}` requirement carefully: WAI-ARIA defines `aria-pressed` for a **toggle** button, whereas a drum hit is normally momentary. Document the instructor-facing decision, ensure any reported state is truthful, and test with assistive technology. Do not treat `aria-pressed` as an automatic accessibility fix.
+- [x] Use native `<button type="button">` controls.
+- [x] Include the instrument name and printed key in the accessible name, e.g., “Kick drum, W”.
+- [x] Preserve native `Tab`, `Enter`, and `Space` behavior.
+- [x] Ensure pointer activation and physical keyboard activation share the same sound/logging pipeline and do not double-fire.
+- [x] Represent an active visual state using more than a color change.
+- [x] Review the slide's `aria-pressed={isActive}` requirement carefully: WAI-ARIA defines `aria-pressed` for a **toggle** button, whereas a drum hit is normally momentary. Document the instructor-facing decision, ensure any reported state is truthful, and test with assistive technology. Do not treat `aria-pressed` as an automatic accessibility fix.
+**Lab 2 HW1 Reuse Evidence**
 
+- [x] Adapted keyboard focus scoping principles from DataGrid.tsx.
+- [x] Reused the aria-describedby instruction pattern.
+- [x] Adapted focus-visible styling for drum controls.
+- [x] Reused the forced-colors accessibility approach.
+- [x] Preserved native button keyboard interactions.
 **Acceptance:** All seven pads work without a mouse, have predictable focus order, and expose correct button names and states to assistive technology.
 
 **T05. Implement sound playback** — Priority: High
