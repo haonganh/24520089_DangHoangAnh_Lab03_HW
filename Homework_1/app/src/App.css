@@ -1,74 +1,89 @@
 
+/* T08 - Responsive and Accessible UI */
+
+.app-container {
+  width: min(100%, 1100px);
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.app-header h1 {
+  font-size: clamp(1.6rem, 5vw, 2.5rem);
+  line-height: 1.3;
+}
+
+.app-header p {
+  color: #d1d5db;
+}
+
+/* Drum Kit */
+
+.drum-kit {
+  padding: 20px;
+  border: 2px solid #9ca3af;
+  border-radius: 16px;
+}
+
 .drum-pad-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 130px), 1fr)
+  );
   gap: 16px;
   margin-top: 24px;
 }
 
 .drum-pad {
+  min-width: 0;
   min-height: 110px;
-  padding: 20px;
-  border: 2px solid #374151;
-  border-radius: 12px;
-  background: #ffffff;
-  color: #111827;
-  cursor: pointer;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 12px;
+
+  border: 2px solid #6b7280;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #111827;
+
+  cursor: pointer;
 }
 
 .drum-pad kbd {
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 700;
 }
 
 .drum-pad:focus-visible,
 .drum-kit:focus-visible {
-  outline: 3px solid #2563eb;
+  outline: 3px solid #60a5fa;
   outline-offset: 4px;
 }
 
 .drum-pad:active,
 .drum-pad[data-active="true"] {
-  background: #dbeafe;
-  border-width: 4px;
-  border-color: #1d4ed8;
+  background: #bfdbfe;
+  border: 4px solid #1d4ed8;
   transform: scale(0.97);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .drum-pad {
-    transition: none;
-    transform: none;
-  }
-}
-/* Adapted from Lab 2 HW1: High Contrast accessibility */
-@media (forced-colors: active) {
-  .drum-pad:focus-visible,
-  .drum-kit:focus-visible {
-    outline: 3px solid Highlight;
-  }
-
-  .drum-pad[data-active="true"] {
-    border: 4px solid Highlight;
-  }
-}
-
-/* T06 - Accessible Hit Log */
+/* Hit Log */
 
 .hit-status {
   display: block;
   margin: 16px 0;
-  color: #d1d5db;
-  font-size: 1rem;
+  color: #e5e7eb;
 }
 
 .hit-list {
-  list-style: decimal;
   padding-left: 24px;
   max-height: 300px;
   overflow-y: auto;
@@ -77,36 +92,29 @@
 .hit-list li {
   display: flex;
   justify-content: space-between;
-  gap: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
   padding: 12px;
   margin-bottom: 8px;
-  border: 1px solid #374151;
+  border: 1px solid #9ca3af;
   border-radius: 8px;
   background: #1f2937;
-  color: #f9fafb;
-}
-
-.hit-list strong {
-  font-weight: 600;
+  color: #ffffff;
 }
 
 .hit-list span {
-  color: #d1d5db;
+  color: #e5e7eb;
 }
 
-/* T07 - Accessible Audio Signal Meter */
+/* Signal Meter */
 
 .signal-meter {
   margin-top: 32px;
   padding: 24px;
-  border: 1px solid #6b7280;
+  border: 1px solid #9ca3af;
   border-radius: 12px;
   background: #1f2937;
-  color: #f9fafb;
-}
-
-.signal-meter h3 {
-  margin-top: 0;
+  color: #ffffff;
 }
 
 .signal-meter label {
@@ -130,14 +138,61 @@
 }
 
 .signal-description {
-  color: #d1d5db;
-  font-size: 0.9rem;
+  color: #e5e7eb;
 }
 
+/* Responsive */
+
+@media (max-width: 480px) {
+  .app-container {
+    padding: 16px 12px 40px;
+  }
+
+  .drum-kit {
+    padding: 12px;
+  }
+
+  .drum-pad-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .drum-pad {
+    min-height: 90px;
+    padding: 12px;
+  }
+
+  .signal-meter {
+    padding: 16px;
+  }
+}
+
+/* Reduced Motion */
+
 @media (prefers-reduced-motion: reduce) {
-  .signal-meter,
-  .signal-meter meter {
-    animation: none;
-    transition: none;
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .drum-pad:active,
+  .drum-pad[data-active="true"] {
+    transform: none;
+  }
+}
+
+/* Windows High Contrast */
+
+@media (forced-colors: active) {
+  .drum-pad:focus-visible,
+  .drum-kit:focus-visible {
+    outline: 3px solid Highlight;
+  }
+
+  .drum-pad[data-active="true"] {
+    border: 4px solid Highlight;
   }
 }

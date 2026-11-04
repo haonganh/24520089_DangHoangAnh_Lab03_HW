@@ -146,3 +146,9 @@ export default function DrumKit() {
     </section>
   );
 }
+<p id="drum-kit-instructions">
+  Focus here, then press W A S D J K L.
+  Use Tab to navigate pads.
+  Press Enter or Space to activate a focused pad.
+  You can also click or tap any pad to play.
+</p>
