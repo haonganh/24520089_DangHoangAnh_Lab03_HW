@@ -80,10 +80,10 @@ Lab03_Repo/
 
 **T02. Formalize the drum contract** — Priority: Critical
 
-- [ ] Create one typed, single-source-of-truth configuration with seven `code` values: `KeyW`, `KeyA`, `KeyS`, `KeyD`, `KeyJ`, `KeyK`, `KeyL`.
-- [ ] Assign a unique drum name and audio sample to each code.
-- [ ] Document audio licensing or use appropriately licensed/local assets.
-- [ ] State the expected behavior when a sample cannot load or audio playback is blocked.
+- [x] Create one typed, single-source-of-truth configuration with seven `code` values: `KeyW`, `KeyA`, `KeyS`, `KeyD`, `KeyJ`, `KeyK`, `KeyL`.
+- [x] Assign a unique drum name and audio sample to each code.
+- [x] Document audio licensing or use appropriately licensed/local assets.
+- [x] State the expected behavior when a sample cannot load or audio playback is blocked.
 
 **Acceptance:** Every supported physical key maps to exactly one pad, and every pad exposes a visible and accessible label.
 
