@@ -91,15 +91,15 @@ Lab03_Repo/
 
 **T03. Build `useDrumKeyboard`** — Priority: Critical
 
-- [ ] Use `useEffect` to register and remove keyboard event listeners.
-- [ ] Read `event.code`, never `keyCode`, to identify mapped keys.
-- [ ] Return early for `event.repeat`, `event.isComposing`, and `Ctrl`/`Alt`/`Meta` combinations.
-- [ ] Return early when the event target is an `INPUT`, `TEXTAREA`, `SELECT`, or an editable element (including an editable ancestor).
-- [ ] Satisfy **WCAG 2.1.4 Character Key Shortcuts**: make shortcuts active only while the drum-kit component is appropriately focused, **or** provide a usable shortcut on/off mechanism. Input isolation alone is insufficient.
-- [ ] Do not intercept keyboard events outside the allowed shortcut scope.
-- [ ] Call `preventDefault()` only for accepted mapped shortcuts when required; do not suppress `Tab`, `Enter`, `Space`, or screen-reader navigation.
-- [ ] Coordinate `keydown`/`keyup` and blur/visibility changes so the active visual state cannot stick.
-- [ ] Keep effect dependencies correct and avoid stale closures or duplicate listeners.
+- [X] Use `useEffect` to register and remove keyboard event listeners.
+- [X] Read `event.code`, never `keyCode`, to identify mapped keys.
+- [X] Return early for `event.repeat`, `event.isComposing`, and `Ctrl`/`Alt`/`Meta` combinations.
+- [X] Return early when the event target is an `INPUT`, `TEXTAREA`, `SELECT`, or an editable element (including an editable ancestor).
+- [X] Satisfy **WCAG 2.1.4 Character Key Shortcuts**: make shortcuts active only while the drum-kit component is appropriately focused, **or** provide a usable shortcut on/off mechanism. Input isolation alone is insufficient.
+- [X] Do not intercept keyboard events outside the allowed shortcut scope.
+- [X] Call `preventDefault()` only for accepted mapped shortcuts when required; do not suppress `Tab`, `Enter`, `Space`, or screen-reader navigation.
+- [X] Coordinate `keydown`/`keyup` and blur/visibility changes so the active visual state cannot stick.
+- [X] Keep effect dependencies correct and avoid stale closures or duplicate listeners.
 
 **Acceptance:** Exactly one hit is produced for one eligible physical key press; repeat, text entry, disabled shortcut mode, and browser shortcuts produce zero accidental hits; listeners are cleaned up on unmount.
 
