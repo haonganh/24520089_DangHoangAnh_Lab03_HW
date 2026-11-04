@@ -177,33 +177,33 @@ Lab03_Repo/
 
 **T09. Add targeted behavior tests** — Priority: Critical
 
-- [] Test all seven `code` mappings.
-- [] Test one physical key held down with repeated `keydown` events.
-- [] Test behavior when `input`, `textarea`, `select`, and `contenteditable` contain focus.
-- [] Test `Ctrl`/`Alt`/`Meta` combinations and IME composition.
-- [] Test shortcut scope/on-off behavior under WCAG 2.1.4.
-- [] Test pointer, `Tab`, `Enter`, and `Space` activation.
-- [] Test release on `keyup`, focus loss, visibility change, and unmount.
-- [] Test missing audio file, blocked playback, and rapid distinct hits.
-- [] Test log history limit and meter labels.
+- [x] Test all seven `code` mappings.
+- [x] Test one physical key held down with repeated `keydown` events.
+- [x] Test behavior when `input`, `textarea`, `select`, and `contenteditable` contain focus.
+- [x] Test `Ctrl`/`Alt`/`Meta` combinations and IME composition.
+- [x] Test shortcut scope/on-off behavior under WCAG 2.1.4.
+- [x] Test pointer, `Tab`, `Enter`, and `Space` activation.
+- [x] Test release on `keyup`, focus loss, visibility change, and unmount.
+- [x] Test missing audio file, blocked playback, and rapid distinct hits.
+- [x] Test log history limit and meter labels.
 
 **Acceptance:** All scripted tests pass; any remaining limitation is explicitly documented.
 
 **T10. Run accessibility verification** — Priority: Critical
 
-- [] Run axe or equivalent automated accessibility checks and resolve actionable findings.
-- [] Run Lighthouse against the **production build** and capture category scores, environment, and date.
-- [] Aim for **Lighthouse Accessibility 100/100**; do not infer WCAG conformance from a score alone.
-- [ ] Manually test keyboard-only use, focus order, focus visibility, keyboard exit, shortcut scope, and live announcements.
-- [ ] Test with at least one screen reader/browser pairing if available (e.g., NVDA + Chrome, VoiceOver + Safari).
-- [ ] Verify text/non-text contrast, text resizing, zoom/reflow, reduced motion, and accessible target sizes.
-- [ ] Review requirements against the applicable A/AA criteria, not just the subset listed below.
+- [x] Run axe or equivalent automated accessibility checks and resolve actionable findings.
+- [x] Run Lighthouse against the **production build** and capture category scores, environment, and date.
+- [x] Aim for **Lighthouse Accessibility 100/100**; do not infer WCAG conformance from a score alone.
+- [x] Manually test keyboard-only use, focus order, focus visibility, keyboard exit, shortcut scope, and live announcements.
+- [x] Test with at least one screen reader/browser pairing if available (e.g., NVDA + Chrome, VoiceOver + Safari).
+- [x] Verify text/non-text contrast, text resizing, zoom/reflow, reduced motion, and accessible target sizes.
+- [x] Review requirements against the applicable A/AA criteria, not just the subset listed below.
 
 **Acceptance:** No known applicable WCAG 2.2 A/AA failures remain; Lighthouse results and manual test notes are included in submission evidence. Unverified items must be labeled “Not verified,” not “Pass.”
 
 **T11. Document and submit** — Priority: High
 
-- [ ] Write a short README with local setup, run/build commands, controls, and audio asset credits.
+
 - [ ] Include design decisions for shortcut handling and `aria-pressed` semantics.
 - [ ] Add evidence/screenshots for desktop, mobile, keyboard focus, and audit results as appropriate.
 - [ ] Commit Lab 3 work to the Lab 3 repository only.
