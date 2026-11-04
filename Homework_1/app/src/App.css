@@ -93,3 +93,51 @@
 .hit-list span {
   color: #d1d5db;
 }
+
+/* T07 - Accessible Audio Signal Meter */
+
+.signal-meter {
+  margin-top: 32px;
+  padding: 24px;
+  border: 1px solid #6b7280;
+  border-radius: 12px;
+  background: #1f2937;
+  color: #f9fafb;
+}
+
+.signal-meter h3 {
+  margin-top: 0;
+}
+
+.signal-meter label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.signal-meter meter {
+  display: block;
+  width: 100%;
+  height: 24px;
+  margin-bottom: 12px;
+  accent-color: #10b981;
+}
+
+#signal-level-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.signal-description {
+  color: #d1d5db;
+  font-size: 0.9rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signal-meter,
+  .signal-meter meter {
+    animation: none;
+    transition: none;
+  }
+}
