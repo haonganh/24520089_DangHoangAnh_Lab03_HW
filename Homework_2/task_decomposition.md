@@ -214,12 +214,12 @@ Lab03_Repo/
 **Suggested commit:** `test(hw2): cover MIDI generation polyphony and FIFO replay`
 
 #### T13 — Profile rendering and audit accessibility (Critical)
-- [ ] Use **React DevTools Profiler** with a controlled one-key press/release; capture evidence that unrelated `PianoKey` instances do not re-render because of that state update.
-- [ ] Review that stable `React.memo` props and handlers survive parent record/transport state changes. Account for Strict Mode/development profiling effects; do not claim that React memo *guarantees* no renders under every condition.
-- [ ] Run Lighthouse **Accessibility** on `npm run build` + `npm run preview`; record actual desktop/mobile scores. Aim for 100, but the HW2 slides shown do not explicitly require 100 Lighthouse.
-- [ ] Run axe DevTools and fix actual findings; record remaining issues.
-- [ ] Perform manual WCAG 2.2 A/AA checks: keyboard-only access, screen reader, focus, contrast, target size, zoom/reflow, reduced motion, error/status.
-- [ ] Save actual audit results in `accessibility_audit.md` and relevant screenshots/profile traces in `evidence/`.
+- [x] Use **React DevTools Profiler** with a controlled one-key press/release; capture evidence that unrelated `PianoKey` instances do not re-render because of that state update.
+- [x] Review that stable `React.memo` props and handlers survive parent record/transport state changes. Account for Strict Mode/development profiling effects; do not claim that React memo *guarantees* no renders under every condition.
+- [x] Run Lighthouse **Accessibility** on `npm run build` + `npm run preview`; record actual desktop/mobile scores. Aim for 100, but the HW2 slides shown do not explicitly require 100 Lighthouse.
+- [x] Run axe DevTools and fix actual findings; record remaining issues.
+- [x] Perform manual WCAG 2.2 A/AA checks: keyboard-only access, screen reader, focus, contrast, target size, zoom/reflow, reduced motion, error/status.
+- [x] Save actual audit results in `accessibility_audit.md` and relevant screenshots/profile traces in `evidence/`.
 
 **Acceptance:** Actual evidence supports performance and accessibility claims; no automated score is presented as proof of full WCAG conformance.  
 **Suggested commit:** `test(hw2): document profiler and WCAG accessibility evidence`
