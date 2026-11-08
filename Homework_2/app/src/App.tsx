@@ -13,6 +13,7 @@ function App() {
   useEffect(() => {
     const synth = new PolyphonicSynth();
     synthRef.current = synth;
+
     const timers = timersRef.current;
 
     return () => {
@@ -28,7 +29,8 @@ function App() {
   }, []);
 
   const handlePlay = useCallback((midi: number) => {
-    
+    console.log('Piano clicked:', midi);
+
     const synth = synthRef.current;
     const note = pianoKeys.find((key) => key.midi === midi);
 
@@ -40,12 +42,10 @@ function App() {
       .then((voiceId) => {
         if (synthRef.current !== synth) return;
 
-        // Temporary note duration for T05.
-        // T07 will implement real note-on/note-off input.
         const timer = window.setTimeout(() => {
           synth.noteOff(voiceId);
           timersRef.current.delete(timer);
-        }, 350);
+        }, 800);
 
         timersRef.current.add(timer);
       })

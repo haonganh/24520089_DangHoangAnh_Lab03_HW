@@ -136,11 +136,11 @@ Lab03_Repo/
 **Suggested commit:** `feat(hw2): implement click-safe polyphonic oscillator synth`
 
 #### T06 — Enforce the eight-voice FIFO ceiling (Critical)
-- [ ] Use insertion-ordered `Map` or an equivalent queue for active voice order; retrieving the oldest entry is O(1) for an ES6 Map iterator.
-- [ ] When a ninth *distinct active* note starts, steal/release the **oldest** active voice first.
-- [ ] Define/reconcile tracked active voices versus oscillators completing a short release tail; prevent unbounded release tails.
-- [ ] Handle retrigger of the same MIDI note without deleting a newer voice from an older `onended` callback.
-- [ ] Test 1–8 voices, 9th voice steal, off-order note release, retrigger, Stop/all-notes-off, and 20+ rapid notes.
+- [x] Use insertion-ordered `Map` or an equivalent queue for active voice order; retrieving the oldest entry is O(1) for an ES6 Map iterator.
+- [x] When a ninth *distinct active* note starts, steal/release the **oldest** active voice first.
+- [x] Define/reconcile tracked active voices versus oscillators completing a short release tail; prevent unbounded release tails.
+- [x] Handle retrigger of the same MIDI note without deleting a newer voice from an older `onended` callback.
+- [x] Test 1–8 voices, 9th voice steal, off-order note release, retrigger, Stop/all-notes-off, and 20+ rapid notes.
 
 **Acceptance:** Tracked active voices never exceed eight; FIFO victim is deterministic; no stuck notes or uncontrolled oscillator accumulation.  
 **Suggested commit:** `feat(hw2): enforce eight-voice FIFO stealing`
