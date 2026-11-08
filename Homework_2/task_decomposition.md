@@ -158,22 +158,22 @@ Lab03_Repo/
 ### Phase 3 — Recording, ordered replay, cancellation (Days 4–5)
 
 #### T08 — Record note sequences accurately (Critical)
-- [ ] Define typed events: `{ midi, freqHz, durationMs, deltaMs }` plus optional stable ID / recorded timestamp.
-- [ ] Capture note-on and note-off with a monotonic time source (`performance.now()`); calculate duration and onset delta accurately.
-- [ ] Preserve rapid repeated notes, simultaneous/chord onsets (including `deltaMs = 0`), and their event ordering.
-- [ ] End/flush notes held when recording stops; define whether Record is allowed during replay.
-- [ ] Expose Start/Stop Recording and Clear controls with understandable state/instructions.
+- [x] Define typed events: `{ midi, freqHz, durationMs, deltaMs }` plus optional stable ID / recorded timestamp.
+- [x] Capture note-on and note-off with a monotonic time source (`performance.now()`); calculate duration and onset delta accurately.
+- [x] Preserve rapid repeated notes, simultaneous/chord onsets (including `deltaMs = 0`), and their event ordering.
+- [x] End/flush notes held when recording stops; define whether Record is allowed during replay.
+- [x] Expose Start/Stop Recording and Clear controls with understandable state/instructions.
 
 **Acceptance:** A recorded melody/chord returns an ordered finite sequence with nonnegative intervals and positive durations; no open/unpaired note remains.  
 **Suggested commit:** `feat(hw2): record MIDI note events and timing`
 
 #### T09 — Adapt the Lab 2 FIFO queue into a replay scheduler (Critical)
-- [ ] Preserve Lab 2's FIFO process/order, settled-once, task cancellation and one-active-worker design *where relevant*.
-- [ ] Implement cancellable inter-note delay using `AbortSignal` **and** explicit timer cleanup. `controller.abort()` alone does not automatically clear `setTimeout`.
-- [ ] Schedule or replay ordered note onsets and releases with no blocking UI loops; guarantee chord notes can overlap.
-- [ ] Scale both `deltaMs` and `durationMs` by 0.5x/1x/2x speed; pitch stays fixed.
-- [ ] Distinguish an expected `AbortError` from a genuine playback failure; ignore late results after Stop.
-- [ ] Add unit tests adapted from `audio-queue-controller.test.ts` for FIFO, cancellation, failure recovery and cleanup.
+- [x] Preserve Lab 2's FIFO process/order, settled-once, task cancellation and one-active-worker design *where relevant*.
+- [x] Implement cancellable inter-note delay using `AbortSignal` **and** explicit timer cleanup. `controller.abort()` alone does not automatically clear `setTimeout`.
+- [x] Schedule or replay ordered note onsets and releases with no blocking UI loops; guarantee chord notes can overlap.
+- [x] Scale both `deltaMs` and `durationMs` by 0.5x/1x/2x speed; pitch stays fixed.
+- [x] Distinguish an expected `AbortError` from a genuine playback failure; ignore late results after Stop.
+- [x] Add unit tests adapted from `audio-queue-controller.test.ts` for FIFO, cancellation, failure recovery and cleanup.
 
 **Acceptance:** Replay preserves note ordering/timing, supports chords, and stops deterministically with no pending timer callbacks that play notes later.  
 **Suggested commit:** `feat(hw2): adapt FIFO audio queue for abortable melody replay`
