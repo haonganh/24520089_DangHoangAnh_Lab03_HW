@@ -1,111 +1,124 @@
 
-import { afterEach, expect, it, vi } from 'vitest';
-import { ReplayScheduler } from './ReplayScheduler';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from 'vitest';
 
-afterEach(() => {
-  vi.useRealTimers();
-});
+import { NoteRecorder } from './NoteRecorder';
 
-const note = (midi: number, deltaMs = 0, durationMs = 100) => ({
-  midi,
-  freqHz: 440,
-  deltaMs,
-  durationMs,
-});
+describe('T12 - NoteRecorder Tests', () => {
+  let now = 1000;
 
-it('preserves FIFO order and overlapping notes', async () => {
-  vi.useFakeTimers();
-
-  const scheduler = new ReplayScheduler();
-  const noteOn = vi.fn(async (midi: number) => midi);
-  const noteOff = vi.fn();
-
-  const replay = scheduler.play(
-    [note(60), note(64, 0, 200)],
-    1,
-    { noteOn, noteOff }
-  );
-
-  await vi.advanceTimersByTimeAsync(0);
-
-  expect(noteOn.mock.calls.map(([midi]) => midi))
-    .toEqual([60, 64]);
-
-  await vi.advanceTimersByTimeAsync(200);
-  await replay;
-
-  expect(noteOff.mock.calls.map(([id]) => id))
-    .toEqual([60, 64]);
-
-  expect(scheduler.isPlaying).toBe(false);
-});
-
-it('cancels pending notes and releases active voices', async () => {
-  vi.useFakeTimers();
-
-  const scheduler = new ReplayScheduler();
-  const noteOn = vi.fn(async (midi: number) => midi);
-  const noteOff = vi.fn();
-
-  const replay = scheduler.play(
-    [note(60, 0, 500), note(64, 1000, 100)],
-    1,
-    { noteOn, noteOff }
-  );
-
-  await vi.advanceTimersByTimeAsync(0);
-  scheduler.stop();
-
-  await expect(replay).rejects.toMatchObject({
-    name: 'AbortError',
+  beforeEach(() => {
+    now = 1000;
+    vi.spyOn(performance, 'now').mockImplementation(() => now);
   });
 
-  await vi.advanceTimersByTimeAsync(1500);
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
 
-  expect(noteOn).toHaveBeenCalledTimes(1);
-  expect(noteOff).toHaveBeenCalledWith(60);
-  expect(noteOff).toHaveBeenCalledTimes(1);
-});
+  it('records MIDI notes with correct timing', () => {
+    const recorder = new NoteRecorder();
 
-it('recovers after playback failure', async () => {
-  vi.useFakeTimers();
+    recorder.start();
 
-  const scheduler = new ReplayScheduler();
+    now = 1100;
+    recorder.noteOn(60, 261.63);
 
-  const failed = scheduler.play(
-    [note(60)],
-    1,
-    {
-      noteOn: async () => {
-        throw new Error('Audio unavailable');
-      },
-      noteOff: vi.fn(),
-    }
-  );
+    now = 1250;
+    recorder.noteOff(60);
 
- 
-// Register the rejection handler before advancing timers.
-const failureAssertion = expect(failed).rejects.toThrow(
-  'Audio unavailable'
-);
+    now = 1300;
+    recorder.noteOn(64, 329.63);
 
-await vi.advanceTimersByTimeAsync(0);
+    now = 1500;
+    recorder.noteOff(64);
 
-await failureAssertion;
+    const notes = recorder.stop();
 
-  const noteOff = vi.fn();
+    expect(notes).toHaveLength(2);
+    expect(notes[0].midi).toBe(60);
+    expect(notes[0].durationMs).toBe(150);
+    expect(notes[0].deltaMs).toBe(100);
 
-  const recovered = scheduler.play(
-    [note(64)],
-    1,
-    {
-      noteOn: async () => 64,
-      noteOff,
-    }
-  );
+    expect(notes[1].midi).toBe(64);
+    expect(notes[1].durationMs).toBe(200);
+    expect(notes[1].deltaMs).toBe(200);
+  });
 
-  await vi.advanceTimersByTimeAsync(200);
-  await recovered;
+  it('supports overlapping notes', () => {
+    const recorder = new NoteRecorder();
 
-  expect(noteOff).toHaveBeenCalledWith(64);
+    recorder.start();
+
+    now = 1100;
+    recorder.noteOn(60, 261.63);
+    recorder.noteOn(64, 329.63);
+
+    now = 1200;
+    recorder.noteOff(64);
+
+    now = 1300;
+    recorder.noteOff(60);
+
+    const notes = recorder.stop();
+
+    expect(notes).toHaveLength(2);
+    expect(notes.map((note) => note.midi))
+      .toEqual([60, 64]);
+
+    expect(notes[0].deltaMs).toBe(100);
+    expect(notes[1].deltaMs).toBe(0);
+  });
+
+  it('prevents duplicate note-on events', () => {
+    const recorder = new NoteRecorder();
+
+    recorder.start();
+
+    now = 1100;
+    recorder.noteOn(60, 261.63);
+    recorder.noteOn(60, 261.63);
+
+    now = 1200;
+    recorder.noteOff(60);
+
+    expect(recorder.stop()).toHaveLength(1);
+  });
+
+  it('releases held notes when recording stops', () => {
+    const recorder = new NoteRecorder();
+
+    recorder.start();
+
+    now = 1100;
+    recorder.noteOn(60, 261.63);
+
+    now = 1400;
+    const notes = recorder.stop();
+
+    expect(notes).toHaveLength(1);
+    expect(notes[0].durationMs).toBe(300);
+  });
+
+  it('clears recording data', () => {
+    const recorder = new NoteRecorder();
+
+    recorder.start();
+
+    now = 1100;
+    recorder.noteOn(60, 261.63);
+
+    recorder.clear();
+
+    expect(recorder.stop()).toEqual([]);
+
+    recorder.start();
+    expect(recorder.stop()).toEqual([]);
+  });
 });

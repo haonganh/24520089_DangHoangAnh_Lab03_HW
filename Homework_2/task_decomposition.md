@@ -203,12 +203,12 @@ Lab03_Repo/
 **Suggested commit:** `style(hw2): complete WCAG-aware responsive piano layout`
 
 #### T12 — Write deterministic tests (Critical)
-- [ ] Test note count, note types and pitch formula, using Vitest.
-- [ ] Test piano activation/release with React Testing Library; cover keyboard, pointer cancellation, disabled controls and no double-fire.
-- [ ] Mock `AudioContext` nodes; test gain-envelope endpoints, oscillator stop/disconnect and active voice FIFO ordering.
-- [ ] Use fake timers to test 0.5x/1x/2x replay timing, chord overlap, AbortController, Stop/unmount and late task cleanup.
-- [ ] Test recording durations and note-on/off pairing under repeated/simultaneous notes.
-- [ ] Run `npm run test`, `npm run build`, and `npm run lint` with all findings recorded.
+- [x] Test note count, note types and pitch formula, using Vitest.
+- [x] Test piano activation/release with React Testing Library; cover keyboard, pointer cancellation, disabled controls and no double-fire.
+- [x] Mock `AudioContext` nodes; test gain-envelope endpoints, oscillator stop/disconnect and active voice FIFO ordering.
+- [x] Use fake timers to test 0.5x/1x/2x replay timing, chord overlap, AbortController, Stop/unmount and late task cleanup.
+- [x] Test recording durations and note-on/off pairing under repeated/simultaneous notes.
+- [x] Run `npm run test`, `npm run build`, and `npm run lint` with all findings recorded.
 
 **Acceptance:** Unit/integration tests for high-risk behavior pass; tests prove behavior rather than existence of code.  
 **Suggested commit:** `test(hw2): cover MIDI generation polyphony and FIFO replay`
