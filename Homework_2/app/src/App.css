@@ -123,3 +123,89 @@
     flex-direction: column;
   }
 }
+
+/* T11 - WCAG 2.2 AA Accessibility */
+
+.piano-scroll {
+  border: 2px solid #9ca3af;
+  border-radius: 8px;
+  scroll-padding-inline: 12px;
+  overscroll-behavior-x: contain;
+}
+
+.piano-scroll:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+/* Visible focus */
+.piano-key:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+  z-index: 5;
+}
+
+/* Active state: not color alone */
+.piano-key[data-active="true"] {
+  background: #93c5fd;
+  color: #111827;
+  box-shadow: inset 0 0 0 4px #111827;
+  font-weight: 700;
+}
+
+.recorder-section button:focus-visible,
+.recorder-section select:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+.recorded-notes-list li {
+  margin-bottom: 8px;
+  overflow-wrap: anywhere;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  main {
+    padding: 16px 12px 40px;
+  }
+
+  .recorder-section {
+    padding: 12px;
+  }
+
+  .recorder-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .recorder-section button,
+  .recorder-section select {
+    max-width: 100%;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Windows High Contrast */
+@media (forced-colors: active) {
+  .piano-key:focus-visible,
+  .piano-scroll:focus-visible {
+    outline: 3px solid Highlight;
+  }
+
+  .piano-key[data-active="true"] {
+    outline: 3px solid Highlight;
+    box-shadow: none;
+    border: 3px solid Highlight;
+  }
+}

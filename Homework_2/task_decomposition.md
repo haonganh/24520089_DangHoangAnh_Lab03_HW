@@ -179,11 +179,11 @@ Lab03_Repo/
 **Suggested commit:** `feat(hw2): adapt FIFO audio queue for abortable melody replay`
 
 #### T10 — Build accessible sequencer transport controls (High)
-- [ ] Implement buttons: Record, Stop Recording, Replay, Stop, Clear; select speed 0.5x, 1x, 2x.
-- [ ] Set truthful enabled/disabled states (no Record while replaying if unsupported; no Replay with an empty sequence).
-- [ ] Display clear recording/replay status and duration/count as text; keep status updates brief and screen-reader friendly.
-- [ ] On Stop or unmount, abort the active replay controller, cancel timers, and silence currently playing replay voices.
-- [ ] Test quick Record → Stop → Replay → Stop → Replay, rapid speed changes, and navigating away mid-replay.
+- [x] Implement buttons: Record, Stop Recording, Replay, Stop, Clear; select speed 0.5x, 1x, 2x.
+- [x] Set truthful enabled/disabled states (no Record while replaying if unsupported; no Replay with an empty sequence).
+- [x] Display clear recording/replay staus and duration/count as text; keep status updates brief and screen-reader friendly.
+- [x] On Stop or unmount, abort the active replay controller, cancel timers, and silence currently playing replay voices.
+- [x] Test quick Record → Stop → Replay → Stop → Replay, rapid speed changes, and navigating away mid-replay.
 
 **Acceptance:** Every transport control works with a keyboard and pointer; Stop stops *immediately* without stale async playback.  
 **Suggested commit:** `feat(hw2): add accessible recording and replay transport`
@@ -191,13 +191,13 @@ Lab03_Repo/
 ### Phase 4 — Visual accessibility, tests and delivery (Days 5–7)
 
 #### T11 — Make the piano perceivable and responsive (High)
-- [ ] Provide semantic `main`, clear headings, page title and written keyboard/scroll instructions.
-- [ ] Keep typical text contrast ≥ **4.5:1**, large text ≥ **3:1**, essential non-text contrast ≥ **3:1**.
-- [ ] Ensure the smallest clickable piano keys meet **WCAG 2.5.8** (24×24 CSS px or documented applicable exception); aim for larger touch targets when practical.
-- [ ] Provide visible `:focus-visible`, focused-key scroll-into-view behavior if required, and no entirely obscured focus.
-- [ ] At 320 CSS px / 400% zoom, content outside the intrinsic 88-key instrument reflows without horizontal page overflow; justify any localized horizontal piano scroll under **WCAG 1.4.10** rather than assuming a blanket exception.
-- [ ] Respect `prefers-reduced-motion`, Windows forced colors, 200% text resize and WCAG text-spacing overrides.
-- [ ] Use correct status/live semantics without announcing all 88 keys or every animation frame.
+- [x] Provide semantic `main`, clear headings, page title and written keyboard/scroll instructions.
+- [x] Keep typical text contrast ≥ **4.5:1**, large text ≥ **3:1**, essential non-text contrast ≥ **3:1**.
+- [x] Ensure the smallest clickable piano keys meet **WCAG 2.5.8** (24×24 CSS px or documented applicable exception); aim for larger touch targets when practical.
+- [x] Provide visible `:focus-visible`, focused-key scroll-into-view behavior if required, and no entirely obscured focus.
+- [x] At 320 CSS px / 400% zoom, content outside the intrinsic 88-key instrument reflows without horizontal page overflow; justify any localized horizontal piano scroll under **WCAG 1.4.10** rather than assuming a blanket exception.
+- [x] Respect `prefers-reduced-motion`, Windows forced colors, 200% text resize and WCAG text-spacing overrides.
+- [x] Use correct status/live semantics without announcing all 88 keys or every animation frame.
 
 **Acceptance:** A keyboard-only and zoomed-in user can reach and operate all keys and transport controls without focus loss.  
 **Suggested commit:** `style(hw2): complete WCAG-aware responsive piano layout`
