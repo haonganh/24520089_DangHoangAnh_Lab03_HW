@@ -81,22 +81,22 @@ Lab03_Repo/
 ### Phase 0 — Preparation, traceability, migration (Day 1)
 
 #### T01 — Initialize HW2 without changing HW1 (Critical)
-- [ ] Confirm Git root and `origin` point to the Lab 3 repository.
-- [ ] Create `Homework_2/app` with a **separate** React + TypeScript + Vite project; `npm install` completes.
-- [ ] Add `Homework_2/task_decomposition.md` and `Homework_2/ai_rule.md` before writing feature code.
+- [x] Confirm Git root and `origin` point to the Lab 3 repository.
+- [x] Create `Homework_2/app` with a **separate** React + TypeScript + Vite project; `npm install` completes.
+- [x] Add `Homework_2/task_decomposition.md` and `Homework_2/ai_rule.md` before writing feature code.
 - [ ] Verify `npm run dev`, `npm run build`, and `npm run lint`; configure `npm run test` when test dependencies are installed.
-- [ ] Confirm `Homework_1/` is unchanged and Lab 2 was not edited.
+- [x] Confirm `Homework_1/` is unchanged and Lab 2 was not edited.
 
 **Acceptance:** HW2 runs independently; Git history/remote belong only to Lab 3.  
 **Suggested commit:** `chore(hw2): initialize standalone React TypeScript app and plans`
 
 #### T02 — Audit and adapt the Lab 2 FIFO code (Critical)
-- [ ] Read the exact five Lab 2 HW2 audio source/test files identified in the reuse map.
-- [ ] Record existing APIs: `enqueue(trackUrl)`, `enqueueTask()`, `cancelTask()`, `cancelAll()`, `getStatus()`, `dispose()`.
-- [ ] Identify reusable FIFO invariants, cancellation, settled-once, abort, lifecycle, and tests.
-- [ ] Design **typed note replay tasks**, which are not URLs/buffers, and choose an explicit cancellation/scheduling API.
-- [ ] Add a short `Lab 2 → Lab 3` migration note in the README draft (avoid unsupported claims of direct code reuse).
-- [ ] Add a regression plan for FIFO order, stop, unmount, and stale async completions.
+- [x] Read the exact five Lab 2 HW2 audio source/test files identified in the reuse map.
+- [x] Record existing APIs: `enqueue(trackUrl)`, `enqueueTask()`, `cancelTask()`, `cancelAll()`, `getStatus()`, `dispose()`.
+- [x] Identify reusable FIFO invariants, cancellation, settled-once, abort, lifecycle, and tests.
+- [x] Design **typed note replay tasks**, which are not URLs/buffers, and choose an explicit cancellation/scheduling API.
+- [x] Add a short `Lab 2 → Lab 3` migration note in the README draft (avoid unsupported claims of direct code reuse).
+- [x] Add a regression plan for FIFO order, stop, unmount, and stale async completions.
 
 **Acceptance:** A written mapping exists from source methods to target behavior; no inappropriate `fetch`/decode coupling remains in the intended synth replay design.  
 **Suggested commit:** `docs(hw2): map Lab 2 FIFO queue reuse and replay contract`
@@ -104,10 +104,10 @@ Lab03_Repo/
 ### Phase 1 — Piano contract and renderer (Days 1–2)
 
 #### T03 — Generate the mathematical 88-key model (Critical)
-- [ ] Implement MIDI range **21–108**, frequencies with 12-tone equal temperament (A4 = 440 Hz).
-- [ ] Derive note names/octaves; determine black/white keys from pitch classes, not a hardcoded 88-entry list.
-- [ ] Assert exactly **88 notes, 52 white, 36 black**, with unique MIDI IDs, ascending order, A0 first and C8 last.
-- [ ] Unit-test a few frequency checks: MIDI 69 = 440 Hz; MIDI 60 ≈ 261.626 Hz; endpoints valid.
+- [x] Implement MIDI range **21–108**, frequencies with 12-tone equal temperament (A4 = 440 Hz).
+- [x] Derive note names/octaves; determine black/white keys from pitch classes, not a hardcoded 88-entry list.
+- [x] Assert exactly **88 notes, 52 white, 36 black**, with unique MIDI IDs, ascending order, A0 first and C8 last.
+- [x] Unit-test a few frequency checks: MIDI 69 = 440 Hz; MIDI 60 ≈ 261.626 Hz; endpoints valid.
 
 **Acceptance:** Pure model generates the correct 88 notes consistently with no runtime audio dependency.  
 **Suggested commit:** `feat(hw2): generate typed 88-key MIDI model`

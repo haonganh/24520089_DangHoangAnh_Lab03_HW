@@ -3,6 +3,14 @@ import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import './App.css'
+import { pianoKeys } from './music/pianoKeys';
+
+console.table(pianoKeys);
+console.log('Total:', pianoKeys.length);
+console.log('White:', pianoKeys.filter(k => !k.isBlack).length);
+console.log('Black:', pianoKeys.filter(k => k.isBlack).length);
+console.log('First:', pianoKeys[0]);
+console.log('Last:', pianoKeys[87]);
 
 function App() {
   const [count, setCount] = useState(0)
