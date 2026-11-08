@@ -1,4 +1,6 @@
 
+/* T04 - Accessible 88-Key Piano */
+
 .piano-scroll {
   max-width: 100%;
   overflow-x: auto;
@@ -14,9 +16,9 @@
 .piano-key {
   position: absolute;
   top: 0;
+  box-sizing: border-box;
   cursor: pointer;
   font: inherit;
-  box-sizing: border-box;
 }
 
 .piano-key.white {
@@ -56,10 +58,7 @@
 }
 
 @media (forced-colors: active) {
-  .piano-key:focus-visible {
-    outline: 3px solid Highlight;
-  }
-
+  .piano-key:focus-visible,
   .piano-key[data-active="true"] {
     outline: 3px solid Highlight;
   }
