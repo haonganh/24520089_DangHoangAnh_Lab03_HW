@@ -83,9 +83,15 @@ it('recovers after playback failure', async () => {
     }
   );
 
-  await vi.advanceTimersByTimeAsync(0);
+ 
+// Register the rejection handler before advancing timers.
+const failureAssertion = expect(failed).rejects.toThrow(
+  'Audio unavailable'
+);
 
-  await expect(failed).rejects.toThrow('Audio unavailable');
+await vi.advanceTimersByTimeAsync(0);
+
+await failureAssertion;
 
   const noteOff = vi.fn();
 

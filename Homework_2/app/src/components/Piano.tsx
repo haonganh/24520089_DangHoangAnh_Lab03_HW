@@ -57,6 +57,7 @@ export default function Piano({
   }, [onNoteOff]);
 
   useEffect(() => {
+    const active = activeRef.current;
     const onVisibilityChange = () => {
       if (document.hidden) releaseAll();
     };
@@ -74,11 +75,13 @@ export default function Piano({
         onVisibilityChange
       );
 
-      for (const midi of activeRef.current) {
-        onNoteOff(midi);
-      }
+   
+for (const midi of active) {
+  onNoteOff(midi);
+}
 
-      activeRef.current.clear();
+active.clear();
+
     };
   }, [releaseAll, onNoteOff]);
 

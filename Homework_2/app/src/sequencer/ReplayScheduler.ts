@@ -98,7 +98,11 @@ export class ReplayScheduler {
     try {
       // One FIFO worker schedules note onsets in recorded order.
       for (const note of notes) {
-        await delay(note.deltaMs / speed, signal);
+       
+if (note.deltaMs > 0) {
+  await delay(note.deltaMs / speed, signal);
+}
+
 
         if (signal.aborted) throw abortError();
 
