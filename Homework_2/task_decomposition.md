@@ -126,11 +126,11 @@ Lab03_Repo/
 ### Phase 2 — Sound and polyphonic voice management (Days 2–3)
 
 #### T05 — Implement the Web Audio synthesizer (Critical)
-- [ ] Create/resume `AudioContext` on a user interaction; define one safe master gain.
-- [ ] Implement `noteOn(midi, frequencyHz)` and `noteOff(midi)` (or a consistent voice-ID model).
-- [ ] Use oscillator + gain envelope per voice with **short attack and release**, including `exponentialRampToValueAtTime` using a **strictly positive** endpoint (e.g., `0.0001`, never 0).
-- [ ] Track node connections and stop/disconnect in `onended` and `dispose()`; no lingering oscillators.
-- [ ] Define behavior for repeated notes, concurrent pointers, and audio context failures; expose readable, non-audio error feedback.
+- [x] Create/resume `AudioContext` on a user interaction; define one safe master gain.
+- [x] Implement `noteOn(midi, frequencyHz)` and `noteOff(midi)` (or a consistent voice-ID model).
+- [x] Use oscillator + gain envelope per voice with **short attack and release**, including `exponentialRampToValueAtTime` using a **strictly positive** endpoint (e.g., `0.0001`, never 0).
+- [x] Track node connections and stop/disconnect in `onended` and `dispose()`; no lingering oscillators.
+- [x] Define behavior for repeated notes, concurrent pointers, and audio context failures; expose readable, non-audio error feedback.
 
 **Acceptance:** Multiple notes can sound together; normal releases are smooth, and resources are cleaned up.  
 **Suggested commit:** `feat(hw2): implement click-safe polyphonic oscillator synth`
