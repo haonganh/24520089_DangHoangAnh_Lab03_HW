@@ -113,12 +113,12 @@ Lab03_Repo/
 **Suggested commit:** `feat(hw2): generate typed 88-key MIDI model`
 
 #### T04 — Build accessible `PianoKey` and `PianoKeyboard` (Critical)
-- [ ] Render all 88 keys in correct black/white piano arrangement, with no overlapping controls that become unreachable.
-- [ ] Use stable `key={midi}` and native buttons with a descriptive accessible name (e.g., “C4, MIDI 60”).
-- [ ] Wrap `PianoKey` with `React.memo` and keep props/handlers referentially stable; do not allocate per-key callback functions in the parent render unless memoization remains effective.
-- [ ] Convey pressed state visually using shape, border, or text as well as color; do not misuse `aria-pressed` as a substitute for momentary note-on/off semantics.
-- [ ] Plan a practical focus strategy for **88 keys** (e.g., one Tab entry point + arrow-key navigation/roving `tabIndex`, with clear instructions); preserve Enter/Space activation and accessible focus.
-- [ ] Make the keyboard horizontally scrollable **within its own region** when necessary; keep controls/instructions reflowing elsewhere.
+- [x] Render all 88 keys in correct black/white piano arrangement, with no overlapping controls that become unreachable.
+- [x] Use stable `key={midi}` and native buttons with a descriptive accessible name (e.g., “C4, MIDI 60”).
+- [x] Wrap `PianoKey` with `React.memo` and keep props/handlers referentially stable; do not allocate per-key callback functions in the parent render unless memoization remains effective.
+- [x] Convey pressed state visually using shape, border, or text as well as color; do not misuse `aria-pressed` as a substitute for momentary note-on/off semantics.
+- [x] Plan a practical focus strategy for **88 keys** (e.g., one Tab entry point + arrow-key navigation/roving `tabIndex`, with clear instructions); preserve Enter/Space activation and accessible focus.
+- [x] Make the keyboard horizontally scrollable **within its own region** when necessary; keep controls/instructions reflowing elsewhere.
 
 **Acceptance:** All 88 note buttons are present, identifiable and operable via keyboard and pointer; visual keyboard order/scrolling are understandable.  
 **Suggested commit:** `feat(hw2): implement memoized accessible 88-key keyboard`
