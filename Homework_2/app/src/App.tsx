@@ -5,63 +5,91 @@ import { pianoKeys } from './music/pianoKeys';
 import { PolyphonicSynth } from './audio/PolyphonicSynth';
 import './App.css';
 
+interface HeldVoice {
+  voiceId: number | null;
+}
+
 function App() {
   const synthRef = useRef<PolyphonicSynth | null>(null);
-  const timersRef = useRef<Set<number>>(new Set());
+  const heldRef = useRef(new Map<number, HeldVoice>());
   const [audioError, setAudioError] = useState('');
 
   useEffect(() => {
     const synth = new PolyphonicSynth();
     synthRef.current = synth;
-
-    const timers = timersRef.current;
+    const held = heldRef.current;
 
     return () => {
       synthRef.current = null;
 
-      for (const timer of timers) {
-        window.clearTimeout(timer);
+      for (const voice of held.values()) {
+        if (voice.voiceId !== null) {
+          synth.noteOff(voice.voiceId);
+        }
       }
 
-      timers.clear();
+      held.clear();
       synth.dispose();
     };
   }, []);
 
-  const handlePlay = useCallback((midi: number) => {
-    console.log('Piano clicked:', midi);
-
+  const handleNoteOn = useCallback((midi: number) => {
     const synth = synthRef.current;
-    const note = pianoKeys.find((key) => key.midi === midi);
+    const note = pianoKeys[midi - 21];
 
-    if (!synth || !note) return;
+    if (!synth || !note || note.midi !== midi) return;
+    if (heldRef.current.has(midi)) return;
+
+    const heldVoice: HeldVoice = { voiceId: null };
+    heldRef.current.set(midi, heldVoice);
 
     setAudioError('');
 
     void synth.noteOn(midi, note.frequency)
       .then((voiceId) => {
-        if (synthRef.current !== synth) return;
-
-        const timer = window.setTimeout(() => {
+        if (
+          synthRef.current !== synth ||
+          heldRef.current.get(midi) !== heldVoice
+        ) {
           synth.noteOff(voiceId);
-          timersRef.current.delete(timer);
-        }, 800);
+          return;
+        }
 
-        timersRef.current.add(timer);
+        heldVoice.voiceId = voiceId;
       })
       .catch((error: unknown) => {
-        if (synthRef.current !== synth) return;
+        if (
+          synthRef.current !== synth ||
+          heldRef.current.get(midi) !== heldVoice
+        ) {
+          return;
+        }
 
-        console.error('Audio error:', error);
+        heldRef.current.delete(midi);
+        console.error('Piano audio error:', error);
         setAudioError('Unable to play the piano note.');
       });
+  }, []);
+
+  const handleNoteOff = useCallback((midi: number) => {
+    const voice = heldRef.current.get(midi);
+    if (!voice) return;
+
+    heldRef.current.delete(midi);
+
+    if (voice.voiceId !== null) {
+      synthRef.current?.noteOff(voice.voiceId);
+    }
   }, []);
 
   return (
     <main>
       <h1>Polyphonic Piano Studio</h1>
 
-      <Piano onPlay={handlePlay} />
+      <Piano
+        onNoteOn={handleNoteOn}
+        onNoteOff={handleNoteOff}
+      />
 
       {audioError && (
         <p role="alert">{audioError}</p>

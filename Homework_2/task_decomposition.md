@@ -146,11 +146,11 @@ Lab03_Repo/
 **Suggested commit:** `feat(hw2): enforce eight-voice FIFO stealing`
 
 #### T07 — Wire pointer and keyboard play safely (High)
-- [ ] Implement pointerdown/note-on and pointerup/pointercancel/lostpointercapture/note-off as applicable.
-- [ ] Maintain keyboard operation (Tab + Enter/Space, or a documented arrow-key keyboard pattern) without duplicate note-on from native click/keyboard events.
-- [ ] Prevent OS repeat floods, IME conflicts, modifier shortcut interception, and unexpected audio while typing in fields.
-- [ ] Keep active-note UI state synchronized on release, blur, visibility changes and unmount.
-- [ ] All sound interactions must use a shared typed action path so recording can observe them.
+- [x] Implement pointerdown/note-on and pointerup/pointercancel/lostpointercapture/note-off as applicable.
+- [x] Maintain keyboard operation (Tab + Enter/Space, or a documented arrow-key keyboard pattern) without duplicate note-on from native click/keyboard events.
+- [x] Prevent OS repeat floods, IME conflicts, modifier shortcut interception, and unexpected audio while typing in fields.
+- [x] Keep active-note UI state synchronized on release, blur, visibility changes and unmount.
+- [x] All sound interactions must use a shared typed action path so recording can observe them.
 
 **Acceptance:** Mouse, touch, and keyboard release reliably; no stuck notes, duplicate activations, or keyboard traps.  
 **Suggested commit:** `feat(hw2): connect accessible note input and release handling`

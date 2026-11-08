@@ -6,8 +6,6 @@ import { pianoKeys } from '../music/pianoKeys';
 const WHITE_WIDTH = 48;
 const BLACK_WIDTH = 30;
 
-// Generate key positions while preserving MIDI order (21–108).
-// This ensures accessible Tab navigation from A0 to C8.
 let whiteCount = 0;
 
 const positionedKeys = pianoKeys.map((note) => {
@@ -19,41 +17,70 @@ const positionedKeys = pianoKeys.map((note) => {
 });
 
 interface PianoProps {
-  onPlay?: (midi: number) => void;
+  onNoteOn: (midi: number) => void;
+  onNoteOff: (midi: number) => void;
 }
 
-export default function Piano({ onPlay }: PianoProps) {
-  const [activeMidi, setActiveMidi] = useState<number | null>(null);
-
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const handlePlay = useCallback(
-    (midi: number) => {
-      setActiveMidi(midi);
-
-      // Clear the previous visual feedback timer.
-      if (timerRef.current !== null) {
-        clearTimeout(timerRef.current);
-      }
-
-      // Reset the active key after 150ms.
-      timerRef.current = setTimeout(() => {
-        setActiveMidi(null);
-      }, 150);
-
-      onPlay?.(midi);
-    },
-    [onPlay]
+export default function Piano({
+  onNoteOn,
+  onNoteOff,
+}: PianoProps) {
+  const activeRef = useRef(new Set<number>());
+  const [activeMidi, setActiveMidi] = useState<Set<number>>(
+    () => new Set()
   );
+  const [resetToken, setResetToken] = useState(0);
 
-  // Clean up timer when the component unmounts.
+  const handleNoteOn = useCallback((midi: number) => {
+    if (activeRef.current.has(midi)) return;
+
+    activeRef.current.add(midi);
+    setActiveMidi(new Set(activeRef.current));
+    onNoteOn(midi);
+  }, [onNoteOn]);
+
+  const handleNoteOff = useCallback((midi: number) => {
+    if (!activeRef.current.delete(midi)) return;
+
+    setActiveMidi(new Set(activeRef.current));
+    onNoteOff(midi);
+  }, [onNoteOff]);
+
+  const releaseAll = useCallback(() => {
+    for (const midi of activeRef.current) {
+      onNoteOff(midi);
+    }
+
+    activeRef.current.clear();
+    setActiveMidi(new Set());
+    setResetToken((previous) => previous + 1);
+  }, [onNoteOff]);
+
   useEffect(() => {
-    return () => {
-      if (timerRef.current !== null) {
-        clearTimeout(timerRef.current);
-      }
+    const onVisibilityChange = () => {
+      if (document.hidden) releaseAll();
     };
-  }, []);
+
+    window.addEventListener('blur', releaseAll);
+    document.addEventListener(
+      'visibilitychange',
+      onVisibilityChange
+    );
+
+    return () => {
+      window.removeEventListener('blur', releaseAll);
+      document.removeEventListener(
+        'visibilitychange',
+        onVisibilityChange
+      );
+
+      for (const midi of activeRef.current) {
+        onNoteOff(midi);
+      }
+
+      activeRef.current.clear();
+    };
+  }, [releaseAll, onNoteOff]);
 
   return (
     <section aria-labelledby="piano-heading">
@@ -61,8 +88,9 @@ export default function Piano({ onPlay }: PianoProps) {
 
       <p id="piano-instructions">
         Use Tab to select a piano key.
-        Press Enter or Space to play.
-        You can also click or tap any key.
+        Hold Enter or Space to play, then release to stop.
+        You can also press and hold a key using a mouse
+        or touchscreen.
       </p>
 
       <div
@@ -78,8 +106,10 @@ export default function Piano({ onPlay }: PianoProps) {
               key={note.midi}
               note={note}
               leftPx={leftPx}
-              isActive={activeMidi === note.midi}
-              onPlay={handlePlay}
+              isActive={activeMidi.has(note.midi)}
+              resetToken={resetToken}
+              onNoteOn={handleNoteOn}
+              onNoteOff={handleNoteOff}
             />
           ))}
         </div>
