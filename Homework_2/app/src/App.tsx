@@ -7,6 +7,10 @@ import {
   NoteRecorder,
   type RecordedNote,
 } from './sequencer/NoteRecorder';
+import {
+  ReplayScheduler,
+  type ReplaySpeed,
+} from './sequencer/ReplayScheduler';
 import './App.css';
 
 interface HeldVoice {
@@ -14,26 +18,36 @@ interface HeldVoice {
 }
 
 function App() {
-  // T05-T07: Polyphonic synthesizer
   const synthRef = useRef<PolyphonicSynth | null>(null);
-  const heldRef = useRef(new Map<number, HeldVoice>());
-
-  // T08: MIDI recording
+  const schedulerRef = useRef<ReplayScheduler | null>(null);
   const recorderRef = useRef(new NoteRecorder());
+  const heldRef = useRef(new Map<number, HeldVoice>());
 
   const [audioError, setAudioError] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const [recordedNotes, setRecordedNotes] = useState<RecordedNote[]>([]);
 
-  // Initialize and clean up audio resources.
+  // T10 - Replay state
+  const [replaySpeed, setReplaySpeed] = useState<ReplaySpeed>(1);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isStopping, setIsStopping] = useState(false);
+  const [replayStatus, setReplayStatus] = useState('Ready to record.');
+
   useEffect(() => {
     const synth = new PolyphonicSynth();
+    const scheduler = new ReplayScheduler();
+
     synthRef.current = synth;
+    schedulerRef.current = scheduler;
 
     const held = heldRef.current;
     const recorder = recorderRef.current;
 
     return () => {
+      scheduler.stop();
+      scheduler.dispose();
+
+      schedulerRef.current = null;
       synthRef.current = null;
 
       for (const voice of held.values()) {
@@ -48,7 +62,7 @@ function App() {
     };
   }, []);
 
-  // T07 + T08: Start a note and record its onset.
+  // T07 - Start piano note
   const handleNoteOn = useCallback((midi: number) => {
     const synth = synthRef.current;
     const note = pianoKeys[midi - 21];
@@ -56,15 +70,10 @@ function App() {
     if (!synth || !note || note.midi !== midi) return;
     if (heldRef.current.has(midi)) return;
 
-    const heldVoice: HeldVoice = {
-      voiceId: null,
-    };
-
+    const heldVoice: HeldVoice = { voiceId: null };
     heldRef.current.set(midi, heldVoice);
 
-    // T08: Record note-on event.
     recorderRef.current.noteOn(midi, note.frequency);
-
     setAudioError('');
 
     void synth.noteOn(midi, note.frequency)
@@ -88,13 +97,12 @@ function App() {
         }
 
         heldRef.current.delete(midi);
-
         console.error('Piano audio error:', error);
         setAudioError('Unable to play the piano note.');
       });
   }, []);
 
-  // T07 + T08: Stop a note and record its duration.
+  // T07 - Release piano note
   const handleNoteOff = useCallback((midi: number) => {
     recorderRef.current.noteOff(midi);
 
@@ -108,46 +116,93 @@ function App() {
     }
   }, []);
 
-  // T08: Start recording.
+  // T08 - Recording controls
   const startRecording = useCallback(() => {
     recorderRef.current.start();
-
     setRecordedNotes([]);
     setIsRecording(true);
+    setReplayStatus('Recording in progress.');
   }, []);
 
-  // T08: Stop recording and retrieve notes.
   const stopRecording = useCallback(() => {
     const notes = recorderRef.current.stop();
 
     setRecordedNotes(notes);
     setIsRecording(false);
+    setReplayStatus(`${notes.length} notes recorded.`);
   }, []);
 
-  // T08: Clear recorded notes.
   const clearRecording = useCallback(() => {
     recorderRef.current.clear();
-
     setRecordedNotes([]);
     setIsRecording(false);
+    setReplayStatus('Recording cleared.');
+  }, []);
+
+  // T10 - Replay recorded notes
+  const startReplay = useCallback(async () => {
+    const synth = synthRef.current;
+    const scheduler = schedulerRef.current;
+
+    if (!synth || !scheduler || recordedNotes.length === 0) {
+      return;
+    }
+
+    if (scheduler.isPlaying || isRecording) return;
+
+    setAudioError('');
+    setIsPlaying(true);
+    setIsStopping(false);
+    setReplayStatus(`Replaying at ${replaySpeed}x speed.`);
+
+    try {
+      await scheduler.play(recordedNotes, replaySpeed, {
+        noteOn: (midi, freqHz) => synth.noteOn(midi, freqHz),
+        noteOff: (voiceId) => synth.noteOff(voiceId),
+      });
+
+      if (schedulerRef.current === scheduler) {
+        setReplayStatus('Replay completed.');
+      }
+    } catch (error: unknown) {
+      if (schedulerRef.current !== scheduler) return;
+
+      if (
+        error instanceof DOMException &&
+        error.name === 'AbortError'
+      ) {
+        setReplayStatus('Replay stopped.');
+      } else {
+        console.error('Replay failed:', error);
+        setAudioError('Unable to replay the recording.');
+        setReplayStatus('Replay failed.');
+      }
+    } finally {
+      if (schedulerRef.current === scheduler) {
+        setIsPlaying(false);
+        setIsStopping(false);
+      }
+    }
+  }, [recordedNotes, replaySpeed, isRecording]);
+
+  // T10 - Cancel replay
+  const stopReplay = useCallback(() => {
+    schedulerRef.current?.stop();
+    setIsStopping(true);
+    setReplayStatus('Stopping replay...');
   }, []);
 
   return (
     <main>
       <h1>Polyphonic Piano Studio</h1>
 
-      {/* T04-T07: Accessible 88-key piano */}
       <Piano
         onNoteOn={handleNoteOn}
         onNoteOff={handleNoteOff}
       />
 
-      {/* Audio error feedback */}
-      {audioError && (
-        <p role="alert">{audioError}</p>
-      )}
+      {audioError && <p role="alert">{audioError}</p>}
 
-      {/* T08: Recording controls */}
       <section
         className="recorder-section"
         aria-labelledby="recorder-heading"
@@ -158,7 +213,7 @@ function App() {
           <button
             type="button"
             onClick={startRecording}
-            disabled={isRecording}
+            disabled={isRecording || isPlaying}
           >
             Start Recording
           </button>
@@ -176,6 +231,7 @@ function App() {
             onClick={clearRecording}
             disabled={
               isRecording ||
+              isPlaying ||
               recordedNotes.length === 0
             }
           >
@@ -183,14 +239,58 @@ function App() {
           </button>
         </div>
 
-        {/* Accessible recording status */}
+        {/* T10 - Replay controls */}
+        <section aria-labelledby="replay-heading">
+          <h3 id="replay-heading">Melody Replay</h3>
+
+          <label htmlFor="replay-speed">
+            Playback Speed
+          </label>
+
+          <select
+            id="replay-speed"
+            value={replaySpeed}
+            disabled={isPlaying || isRecording}
+            onChange={(event) => {
+              setReplaySpeed(
+                Number(event.target.value) as ReplaySpeed
+              );
+            }}
+          >
+            <option value={0.5}>0.5x - Slow</option>
+            <option value={1}>1x - Normal</option>
+            <option value={2}>2x - Fast</option>
+          </select>
+
+          <button
+            type="button"
+            onClick={() => void startReplay()}
+            disabled={
+              isRecording ||
+              isPlaying ||
+              recordedNotes.length === 0
+            }
+          >
+            Replay
+          </button>
+
+          <button
+            type="button"
+            onClick={stopReplay}
+            disabled={!isPlaying || isStopping}
+          >
+            Stop Replay
+          </button>
+        </section>
+
         <p role="status" aria-live="polite">
-          {isRecording
-            ? 'Recording in progress...'
-            : `${recordedNotes.length} notes recorded.`}
+          {replayStatus}
         </p>
 
-        {/* Recorded note history */}
+        <p>
+          Total recorded notes: {recordedNotes.length}
+        </p>
+
         {recordedNotes.length > 0 && (
           <section aria-labelledby="recorded-notes-heading">
             <h3 id="recorded-notes-heading">

@@ -69,3 +69,57 @@
     transition: none;
   }
 }
+
+/* T10 - Replay controls */
+
+.recorder-section {
+  margin-top: 32px;
+  padding: 20px;
+  border: 1px solid #6b7280;
+  border-radius: 12px;
+}
+
+.recorder-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.recorder-section button,
+.recorder-section select {
+  min-height: 44px;
+  padding: 10px 16px;
+  margin: 6px;
+  font: inherit;
+}
+
+.recorder-section button:focus-visible,
+.recorder-section select:focus-visible {
+  outline: 3px solid #60a5fa;
+  outline-offset: 3px;
+}
+
+.recorder-section button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.recorder-section label {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.recorded-notes-list {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 480px) {
+  .recorder-section {
+    padding: 12px;
+  }
+
+  .recorder-controls {
+    flex-direction: column;
+  }
+}
