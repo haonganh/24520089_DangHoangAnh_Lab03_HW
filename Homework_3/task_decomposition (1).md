@@ -273,12 +273,12 @@ File names are proposed for task sequencing, **except** the required slide contr
 
 ### T15 — Complete mandatory AI failure audit, README, and submission
 
-- [ ] Create **`Homework_3/AI_FAILURE_AUDIT.md`** (exact slide filename), with **≥3 distinct defects actually introduced or suggested by AI** and detected during development.
-- [ ] For each defect: initial AI code/behavior; precise file and location; reproduction; **real** DevTools or failing-test evidence; root cause; manual fix; regression; commit hash; before/after status.
-- [ ] Potential *investigation categories*, **not preapproved findings**: stale-closure timer, missing effect cleanup, 409 rollback/double-click, derived-state render loops, inaccessible virtual list. Use only defects that really occur.
-- [ ] Write `Homework_3/README.md`: setup, features, architecture, Lab 2 migration, scope limits, tests, WCAG evidence, audit index, screenshots and how to run demo.
-- [ ] Save relevant authentic screenshots under `Homework_3/evidence/` and update this task checklist; commit after the evidence exists.
-- [ ] Check `git status`, `git log --oneline -18`, `git remote -v`, push to the **Lab 3** remote, and verify files appear on GitHub.
+- [x] Create **`Homework_3/AI_FAILURE_AUDIT.md`** (exact slide filename), with **≥3 distinct defects actually introduced or suggested by AI** and detected during development.
+- [x] For each defect: initial AI code/behavior; precise file and location; reproduction; **real** DevTools or failing-test evidence; root cause; manual fix; regression; commit hash; before/after status.
+- [x] Potential *investigation categories*, **not preapproved findings**: stale-closure timer, missing effect cleanup, 409 rollback/double-click, derived-state render loops, inaccessible virtual list. Use only defects that really occur.
+- [x] Write `Homework_3/README.md`: setup, features, architecture, Lab 2 migration, scope limits, tests, WCAG evidence, audit index, screenshots and how to run demo.
+- [x] Save relevant authentic screenshots under `Homework_3/evidence/` and update this task checklist; commit after the evidence exists.
+- [x] Check `git status`, `git log --oneline -18`, `git remote -v`, push to the **Lab 3** remote, and verify files appear on GitHub.
 - **Done when:** ≥3 evidenced bugs have fix/test/commit traces; README and audit are accurate; working tree clean and push successful.
 - **Commit:** `docs(hw3): finalize AI failure audit and submission evidence`
 
