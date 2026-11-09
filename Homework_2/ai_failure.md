@@ -196,10 +196,10 @@ Homework_2/
 
 - [x] F-01: Abort-aware replay completion fixed; regression test passes.
 - [x] F-02: Absolute-clock onset scheduling implemented; drift comparison recorded.
-- [ ] F-03: Audio stealing policy improved and verified by listening/voice-count tests.
-- [ ] At least three **fixed** findings have authentic before/after evidence.
-- [ ] `npm run test`, `npm run build`, and `npm run lint` succeed in the student's environment.
-- [ ] Code and evidence are committed to the **Lab 3** repository only.
+- [x] F-03: Audio stealing policy improved and verified by listening/voice-count tests.
+- [x] At least three **fixed** findings have authentic before/after evidence.
+- [x] `npm run test`, `npm run build`, and `npm run lint` succeed in the student's environment.
+- [x] Code and evidence are committed to the **Lab 3** repository only.
 
 ## 4. Verification scope and limitations
 
