@@ -1,18 +1,26 @@
 
-import { memo, useMemo, useRef, useState } from 'react';
+import {
+  memo,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import { demoSquads } from '../demo/demoFixtures';
 
 import {
   demoKillEvents,
   filterKillEvents,
-  formatEventTime,
 } from '../killfeed/kill-feed';
 
 import type {
   KillEventType,
   KillFeedEvent,
 } from '../killfeed/kill-feed';
+
+import {
+  VirtualKillFeedList,
+} from './VirtualKillFeedList';
 
 export const KillFeed = memo(function KillFeed() {
   const [events, setEvents] = useState<
@@ -28,6 +36,9 @@ export const KillFeed = memo(function KillFeed() {
 
   const [announcement, setAnnouncement] =
     useState('');
+
+  const [bulkLoaded, setBulkLoaded] =
+    useState(false);
 
   const nextEventNumber = useRef(1);
 
@@ -52,8 +63,10 @@ export const KillFeed = memo(function KillFeed() {
       killer: `${squad.squadName} Player`,
       victim: `Opponent ${number}`,
       squadId: squad.squadId,
-      weapon: number % 2 === 0 ? 'M416' : 'Beryl M762',
-      type: number % 3 === 0 ? 'KNOCK' : 'KILL',
+      weapon:
+        number % 2 === 0 ? 'M416' : 'Beryl M762',
+      type:
+        number % 3 === 0 ? 'KNOCK' : 'KILL',
       timestamp: Date.now(),
     };
 
@@ -68,6 +81,44 @@ export const KillFeed = memo(function KillFeed() {
     );
   };
 
+  // T12: Generate 1,000 events for performance testing.
+  const addBulkEvents = () => {
+    if (bulkLoaded) return;
+
+    const now = Date.now();
+
+    const generated: KillFeedEvent[] =
+      Array.from({ length: 1000 }, (_, index) => {
+        const squad = demoSquads[
+          index % demoSquads.length
+        ];
+
+        return {
+          id: `stress-${now}-${index}`,
+          killer:
+            `${squad.squadName} Player ${index % 4 + 1}`,
+          victim: `Opponent ${index + 1}`,
+          squadId: squad.squadId,
+          weapon:
+            index % 2 === 0 ? 'M416' : 'Beryl M762',
+          type:
+            index % 3 === 0 ? 'KNOCK' : 'KILL',
+          timestamp: now + index,
+        };
+      });
+
+    setEvents((previous) => [
+      ...generated,
+      ...previous,
+    ]);
+
+    setBulkLoaded(true);
+
+    setAnnouncement(
+      'Added 1,000 simulated combat events.'
+    );
+  };
+
   return (
     <section
       className="killfeed-section"
@@ -78,8 +129,8 @@ export const KillFeed = memo(function KillFeed() {
       </h2>
 
       <p>
-        Simulated combat events. Filter by squad,
-        event type or player name.
+        Simulated combat events with virtual scrolling,
+        squad filtering and event type filtering.
       </p>
 
       <div className="killfeed-controls">
@@ -110,7 +161,9 @@ export const KillFeed = memo(function KillFeed() {
               setSquadId(event.target.value)
             }
           >
-            <option value="ALL">All squads</option>
+            <option value="ALL">
+              All squads
+            </option>
 
             {demoSquads.map((squad) => (
               <option
@@ -138,16 +191,39 @@ export const KillFeed = memo(function KillFeed() {
               )
             }
           >
-            <option value="ALL">All events</option>
-            <option value="KILL">Kills</option>
-            <option value="KNOCK">Knocks</option>
+            <option value="ALL">
+              All events
+            </option>
+
+            <option value="KILL">
+              Kills
+            </option>
+
+            <option value="KNOCK">
+              Knocks
+            </option>
           </select>
         </div>
       </div>
 
-      <button type="button" onClick={addDemoEvent}>
-        Add simulated combat event
-      </button>
+      <div className="killfeed-actions">
+        <button
+          type="button"
+          onClick={addDemoEvent}
+        >
+          Add simulated combat event
+        </button>
+
+        <button
+          type="button"
+          onClick={addBulkEvents}
+          disabled={bulkLoaded}
+        >
+          {bulkLoaded
+            ? '1,000 events loaded'
+            : 'Load 1,000 test events'}
+        </button>
+      </div>
 
       <p role="status" aria-live="polite">
         {announcement}
@@ -158,53 +234,10 @@ export const KillFeed = memo(function KillFeed() {
         {events.length} events.
       </p>
 
-      <div
-        className="killfeed-list"
-        role="log"
-        aria-label="PUBG combat event history"
-        aria-live="off"
-      >
-        {filteredEvents.length === 0 ? (
-          <p>No events match your filters.</p>
-        ) : (
-          <ol>
-            {filteredEvents.map((event) => (
-              <li
-                key={event.id}
-                className="killfeed-item"
-              >
-                <span className="killfeed-time">
-                  <time
-                    dateTime={
-                      new Date(
-                        event.timestamp
-                      ).toISOString()
-                    }
-                  >
-                    {formatEventTime(
-                      event.timestamp
-                    )}
-                  </time>
-                </span>
-
-                <span>
-                  <strong>{event.killer}</strong>
-                  {' '}
-                  {event.type === 'KILL'
-                    ? 'eliminated'
-                    : 'knocked'}
-                  {' '}
-                  <strong>{event.victim}</strong>
-                </span>
-
-                <span>
-                  Weapon: {event.weapon}
-                </span>
-              </li>
-            ))}
-          </ol>
-        )}
-      </div>
+      <VirtualKillFeedList
+        key={`${query}|${squadId}|${eventType}`}
+        events={filteredEvents}
+      />
     </section>
   );
 });

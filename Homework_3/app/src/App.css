@@ -314,3 +314,67 @@ button:disabled {
   }
 }
 
+
+/* T12 - Virtual Kill Feed */
+
+.killfeed-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.virtual-killfeed-viewport {
+  height: 420px;
+  max-width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 2px solid #526785;
+  border-radius: 8px;
+  padding: 0 10px;
+  background: #f4f6fa;
+}
+
+.virtual-killfeed-viewport:focus-visible {
+  outline: 3px solid #c2410c;
+  outline-offset: 3px;
+}
+
+.killfeed-list .virtual-killfeed-list {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.killfeed-list
+.virtual-killfeed-list
+.killfeed-item {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10px 12px;
+  overflow: hidden;
+}
+
+.killfeed-list > button {
+  margin: 12px 0;
+}
+
+@media (max-width: 600px) {
+  .virtual-killfeed-viewport {
+    height: 420px;
+    padding: 0 6px;
+  }
+
+  .killfeed-list
+  .virtual-killfeed-list
+  .killfeed-item {
+    padding: 8px;
+  }
+}
+
+@media (forced-colors: active) {
+  .virtual-killfeed-viewport {
+    border-color: CanvasText;
+  }
+}

@@ -240,11 +240,11 @@ File names are proposed for task sequencing, **except** the required slide contr
 
 ### T12 — Integrate Slide 22 Virtual Scroller accessibly
 
-- [ ] Build a fixed-row-height virtual window with overscan for large synthetic leaderboards (e.g. 100–200 test rows); make row height and viewport responsive.
-- [ ] Preserve item order and stable IDs; render enough context to avoid disappearing focused items during keyboard navigation.
-- [ ] Provide an **accessible show-all / nonvirtualized table or list mode** for screen-reader and keyboard users, since DOM-windowing hides off-screen rows from the accessibility tree.
-- [ ] Keep header/filters outside the scroll viewport; expose total results and visible range as readable text.
-- [ ] Test initial window, scrolling, focus retention, filtered list length and accessible fallback mode.
+- [x] Build a fixed-row-height virtual window with overscan for large synthetic leaderboards (e.g. 100–200 test rows); make row height and viewport responsive.
+-  [x] Preserve item order and stable IDs; render enough context to avoid disappearing focused items during keyboard navigation.
+- [x] Provide an **accessible show-all / nonvirtualized table or list mode** for screen-reader and keyboard users, since DOM-windowing hides off-screen rows from the accessibility tree.
+- [x] Keep header/filters outside the scroll viewport; expose total results and visible range as readable text.
+- [x] Test initial window, scrolling, focus retention, filtered list length and accessible fallback mode.
 - **Done when:** Large demo lists render efficiently without making off-screen squads unreachable.
 - **Commit:** `feat(hw3): add accessible virtual leaderboard view`
 
