@@ -18,7 +18,7 @@ function abortError(): DOMException {
   return new DOMException('Replay cancelled', 'AbortError');
 }
 
-// Abortable delay adapted from Lab 2 HW2.
+// Adapted from Lab 2 HW2 FIFO AudioTaskQueue.
 function delay(ms: number, signal: AbortSignal): Promise<void> {
   return new Promise((resolve, reject) => {
     if (signal.aborted) {
@@ -47,7 +47,7 @@ function delay(ms: number, signal: AbortSignal): Promise<void> {
   });
 }
 
-// F-01 FIX: Do not wait indefinitely for pending audio tasks.
+// F-01: Prevent replay from hanging on pending audio tasks.
 function waitOrAbort<T>(
   task: Promise<T>,
   signal: AbortSignal
@@ -94,13 +94,19 @@ export class ReplayScheduler {
     speed: ReplaySpeed,
     callbacks: ReplayCallbacks
   ): Promise<void> {
-    if (this.disposed) throw new Error('Scheduler disposed');
-    if (this.session) throw new Error('Replay already running');
+    if (this.disposed) {
+      throw new Error('Scheduler disposed');
+    }
+
+    if (this.session) {
+      throw new Error('Replay already running');
+    }
 
     if (![0.5, 1, 2].includes(speed)) {
       throw new Error('Invalid replay speed');
     }
 
+    // Validate recorded notes.
     for (const note of notes) {
       if (
         !Number.isInteger(note.midi) ||
@@ -126,6 +132,7 @@ export class ReplayScheduler {
     this.session = session;
 
     const signal = session.controller.signal;
+
     const starts: Promise<void>[] = [];
     const releases: Promise<void>[] = [];
 
@@ -138,23 +145,48 @@ export class ReplayScheduler {
       }
     };
 
+    // F-02 FIX:
+    // Use one monotonic timeline to prevent accumulated timer drift.
+    const replayStartedAt = performance.now();
+    let targetElapsedMs = 0;
+
     try {
-      // FIFO: Preserve recorded note order.
+      // Process note onsets in FIFO order.
       for (const note of notes) {
-        if (note.deltaMs > 0) {
-          await delay(note.deltaMs / speed, signal);
+        // F-02: Calculate absolute target time.
+        targetElapsedMs += note.deltaMs / speed;
+
+        const elapsedMs =
+          performance.now() - replayStartedAt;
+
+        // F-02: Compensate for previous scheduling delays.
+        const remainingMs = Math.max(
+          0,
+          targetElapsedMs - elapsedMs
+        );
+
+        if (remainingMs > 0) {
+          await delay(remainingMs, signal);
         }
 
-        if (signal.aborted) throw abortError();
+        if (signal.aborted) {
+          throw abortError();
+        }
 
-        // Allow overlapping notes without blocking the queue.
+        // Allow overlapping notes.
         const start = Promise.resolve()
           .then(() => {
-            if (signal.aborted) throw abortError();
-            return callbacks.noteOn(note.midi, note.freqHz);
+            if (signal.aborted) {
+              throw abortError();
+            }
+
+            return callbacks.noteOn(
+              note.midi,
+              note.freqHz
+            );
           })
           .then((voiceId) => {
-            // F-01: Release late results after cancellation.
+            // F-01: Clean up late results after cancellation.
             if (signal.aborted) {
               callbacks.noteOff(voiceId);
               return;
@@ -162,6 +194,7 @@ export class ReplayScheduler {
 
             session.activeVoices.add(voiceId);
 
+            // Release each note after its recorded duration.
             const release = delay(
               note.durationMs / speed,
               signal
@@ -180,26 +213,31 @@ export class ReplayScheduler {
         starts.push(start);
       }
 
-      // F-01: Wait for note starts, but allow immediate abort.
-      await waitOrAbort(Promise.all(starts), signal);
+      // F-01: Abort-aware asynchronous waiting.
+      await waitOrAbort(
+        Promise.all(starts),
+        signal
+      );
 
       if (failure) throw failure;
       if (signal.aborted) throw abortError();
 
-      // F-01: Release waits are also abortable.
-      await waitOrAbort(Promise.all(releases), signal);
+      await waitOrAbort(
+        Promise.all(releases),
+        signal
+      );
 
       if (failure) throw failure;
       if (signal.aborted) throw abortError();
 
     } catch (error) {
-      // F-01: Never block cleanup on pending noteOn promises.
       if (failure) throw failure;
       throw error;
 
     } finally {
       session.controller.abort();
 
+      // Release all remaining voices.
       for (const voiceId of session.activeVoices) {
         callbacks.noteOff(voiceId);
       }
@@ -214,6 +252,7 @@ export class ReplayScheduler {
 
   stop(): void {
     const session = this.session;
+
     if (!session) return;
 
     session.controller.abort();

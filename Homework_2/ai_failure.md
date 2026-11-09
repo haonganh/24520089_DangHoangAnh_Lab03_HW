@@ -194,8 +194,8 @@ Homework_2/
 
 ### Resolution checklist
 
-- [ ] F-01: Abort-aware replay completion fixed; regression test passes.
-- [ ] F-02: Absolute-clock onset scheduling implemented; drift comparison recorded.
+- [x] F-01: Abort-aware replay completion fixed; regression test passes.
+- [x] F-02: Absolute-clock onset scheduling implemented; drift comparison recorded.
 - [ ] F-03: Audio stealing policy improved and verified by listening/voice-count tests.
 - [ ] At least three **fixed** findings have authentic before/after evidence.
 - [ ] `npm run test`, `npm run build`, and `npm run lint` succeed in the student's environment.
