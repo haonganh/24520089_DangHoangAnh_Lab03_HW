@@ -211,11 +211,11 @@ File names are proposed for task sequencing, **except** the required slide contr
 
 ### T09 — Build accessible claim cards and user feedback
 
-- [ ] Display crate/ticket title, VND price, available stock, phase, and a clearly labeled **Claim** button.
-- [ ] Use a synchronous in-flight guard (for same-event-loop double clicks) plus visible `disabled` while pending; keep an accessible outcome message.
-- [ ] Present pending/confirmed/409/expired states in text, not color alone; link error text to the affected claim.
-- [ ] If a claim is treated as a purchase, require a review/confirmation step or a reversible action consistent with relevant WCAG error-prevention requirements.
-- [ ] Restore/move focus sensibly after async changes; do not trap focus in a removed control.
+- [x] Display crate/ticket title, VND price, available stock, phase, and a clearly labeled **Claim** button.
+- [x] Use a synchronous in-flight guard (for same-event-loop double clicks) plus visible `disabled` while pending; keep an accessible outcome message.
+- [x] Present pending/confirmed/409/expired states in text, not color alone; link error text to the affected claim.
+- [x] If a claim is treated as a purchase, require a review/confirmation step or a reversible action consistent with relevant WCAG error-prevention requirements.
+- [x] Restore/move focus sensibly after async changes; do not trap focus in a removed control.
 - **Done when:** Keyboard and pointer users can make, cancel/retry and understand simulated claims.
 - **Commit:** `feat(hw3): build accessible crate and ticket claim interface`
 
