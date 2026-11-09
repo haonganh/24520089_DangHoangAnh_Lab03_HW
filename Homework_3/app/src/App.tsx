@@ -164,14 +164,18 @@ function App() {
   };
 
   return (
+    
     <>
+    <a className="skip-link" href="#main-content">
+  Skip to main content
+</a>
       <header className="site-header">
         <h1>KRAFTON × PUBG Vietnam Championship</h1>
 
         <p>Airdrop Arena – Unofficial Demo</p>
       </header>
 
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
         <section aria-labelledby="arena-title">
           <h2 id="arena-title">
             PUBG Vietnam Airdrop Arena

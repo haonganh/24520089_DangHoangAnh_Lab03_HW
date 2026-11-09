@@ -262,12 +262,12 @@ File names are proposed for task sequencing, **except** the required slide contr
 
 ### T14 — Deterministic regression tests and React DevTools verification
 
-- [ ] Run all existing Lab 2-derived timer/inventory regressions **adapted to the new domain**.
-- [ ] Add hook, claim API, reducer, virtual list, leaderboard, kill-feed and keyboard integration tests.
-- [ ] Use Vitest fake timers/system time and controllable Promise resolution to reproduce hidden-tab jumps and 409 races.
-- [ ] React DevTools **Profiler**: verify unnecessary re-renders are avoided for unaffected rows/claim cards; record a screenshot.
-- [ ] React DevTools Components/Chrome DevTools: verify interval/listener cleanup and no stale closure after target/offset changes.
-- [ ] Run `npm run test`, `npm run build`, `npm run lint`; do not mark checks as passed until real output confirms them.
+- [x] Run all existing Lab 2-derived timer/inventory regressions **adapted to the new domain**.
+- [x] Add hook, claim API, reducer, virtual list, leaderboard, kill-feed and keyboard integration tests.
+- [x] Use Vitest fake timers/system time and controllable Promise resolution to reproduce hidden-tab jumps and 409 races.
+- [x] React DevTools **Profiler**: verify unnecessary re-renders are avoided for unaffected rows/claim cards; record a screenshot.
+- [x] React DevTools Components/Chrome DevTools: verify interval/listener cleanup and no stale closure after target/offset changes.
+- [x] Run `npm run test`, `npm run build`, `npm run lint`; do not mark checks as passed until real output confirms them.
 - **Done when:** Tests pass, screenshots are real, and there are no unresolved build/lint failures.
 - **Commit:** `test(hw3): verify timer claims leaderboard and accessibility`
 

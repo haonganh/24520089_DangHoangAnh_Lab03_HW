@@ -378,3 +378,77 @@ button:disabled {
     border-color: CanvasText;
   }
 }
+
+/* T14 - WCAG 2.2 AA Accessibility */
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 1000;
+  padding: 12px 20px;
+  background: #ffffff;
+  color: #172033;
+  border: 3px solid #172033;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+:focus-visible {
+  outline: 3px solid #c2410c;
+  outline-offset: 3px;
+}
+
+#main-content:focus {
+  outline: none;
+}
+
+/* Make focused controls visible when scrolling. */
+:focus-visible {
+  scroll-margin-block: 24px;
+}
+
+/* Keep interactive targets comfortably sized. */
+button,
+input,
+select {
+  min-height: 44px;
+}
+
+/* Allow long labels to wrap instead of overflowing. */
+button,
+h1,
+h2,
+h3,
+p,
+td,
+th {
+  overflow-wrap: anywhere;
+}
+
+/* Respect text spacing adjustments. */
+body {
+  line-height: 1.6;
+}
+
+/* Avoid content clipping at high zoom levels. */
+@media (max-width: 600px) {
+  .claim-actions button,
+  .killfeed-actions button {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
