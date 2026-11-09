@@ -225,12 +225,12 @@ Lab03_Repo/
 **Suggested commit:** `test(hw2): document profiler and WCAG accessibility evidence`
 
 #### T14 — Complete documentation and submit (High)
-- [ ] Write `Homework_2/README.md`: overview, controls, setup, build, test, recording/replay, design tradeoffs and known limitations.
-- [ ] Include an accurate table identifying exactly which Lab 2 HW2 source files/methods/patterns were **copied**, **adapted**, or **referenced**. Explain that voice FIFO and replay FIFO are distinct.
-- [ ] Link to verified test/profiler/axe/Lighthouse evidence; list any remaining risks honestly.
-- [ ] Confirm `.gitignore` excludes `node_modules/`, `dist/`, `.env`/secrets and generated artifacts not intended for submission.
-- [ ] Verify a clean install (`npm ci`), tests, lint, production build and preview from inside `Homework_2/app`.
-- [ ] Mark checklist items complete **only after checking them**; commit and push to **Lab 3**, not Lab 2.
+- [x] Write `Homework_2/README.md`: overview, controls, setup, build, test, recording/replay, design tradeoffs and known limitations.
+- [x] Include an accurate table identifying exactly which Lab 2 HW2 source files/methods/patterns were **copied**, **adapted**, or **referenced**. Explain that voice FIFO and replay FIFO are distinct.
+- [x] Link to verified test/profiler/axe/Lighthouse evidence; list any remaining risks honestly.
+- [x] Confirm `.gitignore` excludes `node_modules/`, `dist/`, `.env`/secrets and generated artifacts not intended for submission.
+- [x] Verify a clean install (`npm ci`), tests, lint, production build and preview from inside `Homework_2/app`.
+- [x] Mark checklist items complete **only after checking them**; commit and push to **Lab 3**, not Lab 2.
 
 **Acceptance:** A reviewer can clone Lab 3, run HW2 independently, reproduce the major behavior and inspect reuse/test/accessibility evidence.  
 **Suggested commit:** `docs(hw2): finalize README reuse audit and submission`
