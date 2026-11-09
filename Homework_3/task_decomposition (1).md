@@ -190,11 +190,11 @@ File names are proposed for task sequencing, **except** the required slide contr
 
 ### T07 — Adapt Lab 2 inventory FSM for crate/ticket claims
 
-- [ ] Extract a pure reducer/module based on Lab 2 HW3 `inventory-machine.ts`, with per-drop stock/reservations.
-- [ ] Define states such as `IDLE`, `PENDING`, `CONFIRMED`, `ROLLED_BACK`, `REJECTED` and stable request IDs; distinguish client state from mock-server state.
-- [ ] On claim, reserve only one available unit and record the original transaction; use immutable transitions.
-- [ ] Prevent negative stock, duplicate reservation, double settlement, and invalid transitions.
-- [ ] Add tests for five-stock/twenty-request competition, zero stock, duplicate requests, success and rollback.
+- [x] Extract a pure reducer/module based on Lab 2 HW3 `inventory-machine.ts`, with per-drop stock/reservations.
+- [x] Define states such as `IDLE`, `PENDING`, `CONFIRMED`, `ROLLED_BACK`, `REJECTED` and stable request IDs; distinguish client state from mock-server state.
+- [x] On claim, reserve only one available unit and record the original transaction; use immutable transitions.
+- [x] Prevent negative stock, duplicate reservation, double settlement, and invalid transitions.
+- [x] Add tests for five-stock/twenty-request competition, zero stock, duplicate requests, success and rollback.
 - **Done when:** Every accepted claim changes available stock once, and every rejected claim restores only its own optimistic decrement.
 - **Commit:** `feat(hw3): adapt optimistic crate inventory state machine`
 
