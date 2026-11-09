@@ -132,29 +132,29 @@ File names are proposed for task sequencing, **except** the required slide contr
 
 ### T01 — Scaffold React 19 + TypeScript, Vite, and test tooling
 
-- [ ] Create `Homework_3/app` with the React + TypeScript Vite template; confirm compatible React version and TypeScript config.
-- [ ] Install dependencies; configure Vitest, jsdom, React Testing Library and user-event as needed.
-- [ ] Add scripts for `dev`, `test`, `build`, `lint`; preserve lockfile.
-- [ ] Replace Vite starter content with accessible semantic `<header>`, `<main>` and `<footer>` placeholders.
+- [x] Create `Homework_3/app` with the React + TypeScript Vite template; confirm compatible React version and TypeScript config.
+- [x] Install dependencies; configure Vitest, jsdom, React Testing Library and user-event as needed.
+- [x] Add scripts for `dev`, `test`, `build`, `lint`; preserve lockfile.
+- [x] Replace Vite starter content with accessible semantic `<header>`, `<main>` and `<footer>` placeholders.
 - **Done when:** `npm run dev`, `npm run test`, `npm run build` and `npm run lint` are runnable (tests may initially be a simple smoke test).
 - **Commit:** `chore(hw3): initialize React TypeScript arena app`
 
 ### T02 — Audit and adapt Lab 2 sources (not a blind copy)
 
-- [ ] Open the exact Lab 2 HW3 files listed in Section 1.2; identify reusable pure timing and inventory logic.
-- [ ] Preserve proven constraints: nonnegative integer stock, duplicate ID rejection, legal transitions, idempotent cleanup and simulated concurrency.
-- [ ] Record differences: duration vs absolute epoch, single inventory vs per-drop stock, local checkout vs async 409 confirmation.
-- [ ] Copy/adapt relevant unit-test scenarios; do **not** import an entire Lab 2 app or mix repositories.
+- [x] Open the exact Lab 2 HW3 files listed in Section 1.2; identify reusable pure timing and inventory logic.
+- [x] Preserve proven constraints: nonnegative integer stock, duplicate ID rejection, legal transitions, idempotent cleanup and simulated concurrency.
+- [x] Record differences: duration vs absolute epoch, single inventory vs per-drop stock, local checkout vs async 409 confirmation.
+- [x] Copy/adapt relevant unit-test scenarios; do **not** import an entire Lab 2 app or mix repositories.
 - **Done when:** Migration notes identify source modules and changes, and no Lab 2 repo files are modified.
 - **Commit:** `docs(hw3): map Lab 2 timer and inventory reuse`
 
 ### T03 — Implement domain contract and Vietnamese scenario fixtures
 
-- [ ] Implement `DropPhase`, `PubgCrateDrop` and `PubgVnSquadStanding` **exactly** as specified in Section 1.1.
-- [ ] Add typed demo fixtures for a **PVS Finals VIP Pass + 5,000 G-Coin** bundle and a G-Coin crate, with valid stock and epoch timestamps.
-- [ ] Provide four named Vietnamese tournament squad fixtures; clearly label scores as demonstration data.
-- [ ] Add a type-safe VND formatter using `Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })`.
-- [ ] Validate nonnegative stock, finite timestamps/prices and unique IDs; do not add mutable fields to readonly contract objects.
+- [x] Implement `DropPhase`, `PubgCrateDrop` and `PubgVnSquadStanding` **exactly** as specified in Section 1.1.
+- [x] Add typed demo fixtures for a **PVS Finals VIP Pass + 5,000 G-Coin** bundle and a G-Coin crate, with valid stock and epoch timestamps.
+- [x] Provide four named Vietnamese tournament squad fixtures; clearly label scores as demonstration data.
+- [x] Add a type-safe VND formatter using `Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })`.
+- [x] Validate nonnegative stock, finite timestamps/prices and unique IDs; do not add mutable fields to readonly contract objects.
 - **Done when:** Types compile and format/validation unit tests pass.
 - **Commit:** `feat(hw3): define PUBG Vietnam arena domain and fixtures`
 
