@@ -230,11 +230,11 @@ File names are proposed for task sequencing, **except** the required slide contr
 
 ### T11 — Implement live kill-feed and user-controlled updates
 
-- [ ] Define a typed mock kill-feed event: unique ID, squad, player/description, timestamp and points where needed.
-- [ ] Support filters by team and/or kill point/event type, with clear/reset actions.
-- [ ] Provide bounded demo updates (manual **Add Demo Event** or an optional toggle for automatic updates); clean up intervals/subscriptions.
-- [ ] Offer **Pause/Resume live feed** without pausing the authoritative drop deadline; avoid unexpected focus changes.
-- [ ] Avoid chatty `aria-live` announcements for every simulated event; announce only a concise summary or user-triggered changes.
+- [x] Define a typed mock kill-feed event: unique ID, squad, player/description, timestamp and points where needed.
+- [x] Support filters by team and/or kill point/event type, with clear/reset actions.
+- [x] Provide bounded demo updates (manual **Add Demo Event** or an optional toggle for automatic updates); clean up intervals/subscriptions.
+- [x] Offer **Pause/Resume live feed** without pausing the authoritative drop deadline; avoid unexpected focus changes.
+- [x] Avoid chatty `aria-live` announcements for every simulated event; announce only a concise summary or user-triggered changes.
 - **Done when:** Feed updates, filtering, pause/resume and empty states are independently testable.
 - **Commit:** `feat(hw3): add filterable PUBG VN kill feed`
 

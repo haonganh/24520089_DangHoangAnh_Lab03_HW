@@ -5,6 +5,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { KillFeed } from './components/KillFeed';
 
 import { AirdropCountdown } from './components/AirdropCountdown';
 
@@ -229,6 +230,8 @@ function App() {
           </div>
         </section>
         <Leaderboard />
+    
+<KillFeed />
       </main>
 
       <footer className="site-footer">

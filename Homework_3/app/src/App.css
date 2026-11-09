@@ -227,3 +227,90 @@ button:disabled {
     color: CanvasText;
   }
 }
+
+
+/* T11 - PUBG Kill Feed */
+
+.killfeed-section {
+  margin-top: 48px;
+}
+
+.killfeed-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.killfeed-controls > div {
+  flex: 1 1 200px;
+}
+
+.killfeed-controls label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.killfeed-controls input,
+.killfeed-controls select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 2px solid #526785;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #172033;
+  font: inherit;
+}
+
+.killfeed-controls input:focus-visible,
+.killfeed-controls select:focus-visible {
+  outline: 3px solid #c2410c;
+  outline-offset: 3px;
+}
+
+.killfeed-list {
+  margin-top: 16px;
+}
+
+.killfeed-list ol {
+  margin: 0;
+  padding-left: 28px;
+}
+
+.killfeed-item {
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 2px solid #526785;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #172033;
+}
+
+.killfeed-item span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.killfeed-time {
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .killfeed-section {
+    margin-top: 32px;
+  }
+
+  .killfeed-item {
+    padding: 12px;
+  }
+}
+
+@media (forced-colors: active) {
+  .killfeed-item {
+    border-color: CanvasText;
+  }
+}
+
