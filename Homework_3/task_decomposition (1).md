@@ -250,13 +250,13 @@ File names are proposed for task sequencing, **except** the required slide contr
 
 ### T13 — Integrate arena UI and WCAG 2.2 AA styling
 
-- [ ] Assemble semantic landing, event details, airdrop countdown, claim inventory, leaderboard, filter controls and kill feed.
-- [ ] Make mobile/desktop layouts robust at **320 CSS px** and at **400% browser zoom**; avoid viewport-width clipping of primary controls.
-- [ ] Meet text contrast ≥ **4.5:1** for normal text / ≥ **3:1** for large text; component/focus-state indicators ≥ **3:1** where required.
-- [ ] Provide visible `:focus-visible`, focus not obscured by sticky elements, target size ≥ **24×24 CSS px** or valid spacing exception (prefer 44×44), and logical heading/order.
-- [ ] Honor `prefers-reduced-motion` and forced-colors; support 200% text resizing and text spacing.
-- [ ] Use `lang="vi"` if primary on-screen UI is Vietnamese; ensure English product terms are still intelligible.
-- [ ] Do not use unauthorized official logos/artwork or claim affiliation; label scenario as fictional/demo.
+- [x] Assemble semantic landing, event details, airdrop countdown, claim inventory, leaderboard, filter controls and kill feed.
+- [x] Make mobile/desktop layouts robust at **320 CSS px** and at **400% browser zoom**; avoid viewport-width clipping of primary controls.
+- [x] Meet text contrast ≥ **4.5:1** for normal text / ≥ **3:1** for large text; component/focus-state indicators ≥ **3:1** where required.
+- [x] Provide visible `:focus-visible`, focus not obscured by sticky elements, target size ≥ **24×24 CSS px** or valid spacing exception (prefer 44×44), and logical heading/order.
+- [x] Honor `prefers-reduced-motion` and forced-colors; support 200% text resizing and text spacing.
+- [x] Use `lang="vi"` if primary on-screen UI is Vietnamese; ensure English product terms are still intelligible.
+- [x] Do not use unauthorized official logos/artwork or claim affiliation; label scenario as fictional/demo.
 - **Done when:** All key interactions are keyboard operable and the manual accessibility matrix in Section 4 is checked.
 - **Commit:** `style(hw3): implement responsive WCAG 2.2 AA arena UI`
 
