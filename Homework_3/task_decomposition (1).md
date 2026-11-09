@@ -160,10 +160,10 @@ File names are proposed for task sequencing, **except** the required slide contr
 
 ### T04 — Build anti-drift clock utilities using absolute epochs
 
-- [ ] Implement pure functions for `remainingMs = Math.max(0, targetEpochMs - (Date.now() + serverOffsetMs))`.
-- [ ] Validate finite target/offset and handle `0` boundary consistently; round only for **display**, not state logic.
-- [ ] Preserve Date.now-based calculation from Lab 2 HW3 rather than `seconds - 1` timers.
-- [ ] Test delayed callbacks, large fake clock jumps, negative/positive offsets and expired drops.
+- [x] Implement pure functions for `remainingMs = Math.max(0, targetEpochMs - (Date.now() + serverOffsetMs))`.
+- [x] Validate finite target/offset and handle `0` boundary consistently; round only for **display**, not state logic.
+- [x] Preserve Date.now-based calculation from Lab 2 HW3 rather than `seconds - 1` timers.
+- [x] Test delayed callbacks, large fake clock jumps, negative/positive offsets and expired drops.
 - **Done when:** A delay or background gap does not accumulate countdown error.
 - **Commit:** `feat(hw3): implement absolute epoch anti-drift clock`
 
