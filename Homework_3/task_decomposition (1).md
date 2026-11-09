@@ -221,10 +221,10 @@ File names are proposed for task sequencing, **except** the required slide contr
 
 ### T10 — Implement leaderboard sorting and selectors
 
-- [ ] Provide selectors for sorting by **WWCD**, **placement points**, **kill points**, with deterministic stable tie-break (`squadId`).
-- [ ] Provide typed sort direction and text/team filters; use `useMemo` for derived arrays, not an effect that mirrors props into state.
-- [ ] Display visible column labels, ordering direction, and score definitions; distinguish mock scores from official results.
-- [ ] Test ordering, ties, empty lists, nonmutation of source fixtures and locale-aware team search.
+- [x] Provide selectors for sorting by **WWCD**, **placement points**, **kill points**, with deterministic stable tie-break (`squadId`).
+- [x] Provide typed sort direction and text/team filters; use `useMemo` for derived arrays, not an effect that mirrors props into state.
+- [x] Display visible column labels, ordering direction, and score definitions; distinguish mock scores from official results.
+- [x] Test ordering, ties, empty lists, nonmutation of source fixtures and locale-aware team search.
 - **Done when:** Filters/sorts are correct and do not rewrite the original data.
 - **Commit:** `feat(hw3): add PUBG squad leaderboard sorting and filters`
 

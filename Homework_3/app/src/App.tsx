@@ -1,4 +1,4 @@
-
+import { Leaderboard } from './components/Leaderboard';
 import {
   useEffect,
   useReducer,
@@ -228,6 +228,7 @@ function App() {
             })}
           </div>
         </section>
+        <Leaderboard />
       </main>
 
       <footer className="site-footer">
