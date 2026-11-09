@@ -200,12 +200,12 @@ File names are proposed for task sequencing, **except** the required slide contr
 
 ### T08 — Implement asynchronous mock claim API and HTTP 409 rollback
 
-- [ ] Create a cancellable mock API that can respond success, **409 Conflict / LOOTED_OUT**, and other errors.
-- [ ] Simulate delay and out-of-order responses to exercise optimistic concurrency; do not pretend browser-local mocks are globally authoritative.
-- [ ] Implement explicit `claimId` matching so stale/duplicate responses cannot commit or roll back the wrong claim.
-- [ ] Roll back exactly once on 409 and refresh/reconcile displayed stock with the mock authoritative result.
-- [ ] Abort outstanding requests on unmount/reset; prevent late results from mutating UI after cancellation.
-- [ ] Add integration tests: success, 409, network failure, duplicate-click race, retry, stale response and unmount cleanup.
+- [x] Create a cancellable mock API that can respond success, **409 Conflict / LOOTED_OUT**, and other errors.
+- [x] Simulate delay and out-of-order responses to exercise optimistic concurrency; do not pretend browser-local mocks are globally authoritative.
+- [x] Implement explicit `claimId` matching so stale/duplicate responses cannot commit or roll back the wrong claim.
+- [x] Roll back exactly once on 409 and refresh/reconcile displayed stock with the mock authoritative result.
+- [x] Abort outstanding requests on unmount/reset; prevent late results from mutating UI after cancellation.
+- [x] Add integration tests: success, 409, network failure, duplicate-click race, retry, stale response and unmount cleanup.
 - **Done when:** A forced 409 restores stock and explains the conflict without an uncaught error.
 - **Commit:** `feat(hw3): handle claim conflicts and idempotent rollback`
 
