@@ -10,13 +10,14 @@ export interface PubgAirdropTimerResult {
   remainingMs: number;
   formattedTime: string;
   isExpired: boolean;
+  nowEpochMs: number;
 }
 
 export function usePubgAirdropTimer(
   targetEpochMs: number,
   serverOffsetMs = 0
 ): PubgAirdropTimerResult {
-  const [nowEpochMs, setNowEpochMs] = useState(
+  const [nowEpochMs, setNowEpochMs] = useState<number>(
     () => Date.now()
   );
 
@@ -25,13 +26,13 @@ export function usePubgAirdropTimer(
       setNowEpochMs(Date.now());
     };
 
-    // Refresh the countdown using absolute time.
-    const intervalId = window.setInterval(
-      syncClock,
-      250
-    );
+    // Synchronize immediately when mounted.
+    syncClock();
 
-    // Resync immediately when returning to the tab.
+    // Anti-drift: always calculate time from Date.now().
+    const intervalId = window.setInterval(syncClock, 250);
+
+    // Resynchronize when returning to the browser tab.
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
         syncClock();
@@ -43,9 +44,10 @@ export function usePubgAirdropTimer(
       handleVisibilityChange
     );
 
+    // Resynchronize when browser window receives focus.
     window.addEventListener('focus', syncClock);
 
-    // Prevent timer and event-listener leaks.
+    // Clean up timers and listeners on unmount.
     return () => {
       window.clearInterval(intervalId);
 
@@ -68,5 +70,6 @@ export function usePubgAirdropTimer(
     remainingMs,
     formattedTime: formatRemainingTime(remainingMs),
     isExpired: remainingMs === 0,
+    nowEpochMs,
   };
 }

@@ -169,22 +169,22 @@ File names are proposed for task sequencing, **except** the required slide contr
 
 ### T05 — Implement `usePubgAirdropTimer` and tab visibility resync
 
-- [ ] Export `usePubgAirdropTimer(targetEpochMs: number, serverOffsetMs = 0)` from `src/hooks/usePubgAirdropTimer.ts`.
-- [ ] Derive remaining time from **current** target/offset; never capture obsolete values in a stale closure.
-- [ ] Schedule reasonably paced updates using `requestAnimationFrame` or a 250 ms interval (as illustrated on the slide), with a bounded React state update rate.
-- [ ] Immediately resync on `document.visibilitychange` when the page becomes visible; subscribe/cleanup correctly and avoid duplicate timers in StrictMode.
-- [ ] Provide a stable return contract (`remainingMs`, `isLive` or an equivalent documented shape) and graceful unmount.
-- [ ] Write hook tests using mocked time and `visibilityState`/events.
+- [x] Export `usePubgAirdropTimer(targetEpochMs: number, serverOffsetMs = 0)` from `src/hooks/usePubgAirdropTimer.ts`.
+- [x] Derive remaining time from **current** target/offset; never capture obsolete values in a stale closure.
+- [x] Schedule reasonably paced updates using `requestAnimationFrame` or a 250 ms interval (as illustrated on the slide), with a bounded React state update rate.
+- [x] Immediately resync on `document.visibilitychange` when the page becomes visible; subscribe/cleanup correctly and avoid duplicate timers in StrictMode.
+- [x] Provide a stable return contract (`remainingMs`, `isLive` or an equivalent documented shape) and graceful unmount.
+- [x] Write hook tests using mocked time and `visibilityState`/events.
 - **Done when:** Leaving a tab inactive then returning shows the correct remaining time without timer reset or drift.
 - **Commit:** `feat(hw3): add visibility-aware airdrop timer hook`
 
 ### T06 — Implement finite drop phases and readable countdown UI
 
-- [ ] Derive `WARMUP`, `AIRDROP_LIVE`, `LOOTED_OUT` and `EXPIRED` from clock, stock and an explicit demo claim-window policy.
-- [ ] Define precedence: **expired window → EXPIRED**; otherwise **zero stock → LOOTED_OUT**; otherwise live/warmup by epoch. Document this decision.
-- [ ] Display meaningful `dd:hh:mm:ss` or `hh:mm:ss` based on remaining time, with visible units and phase labels.
-- [ ] Update live regions only for meaningful **phase changes**; do not announce each frame/second to screen readers.
-- [ ] Add tests for boundary conditions (before, at, after epoch, zero stock, after claim window).
+- [x] Derive `WARMUP`, `AIRDROP_LIVE`, `LOOTED_OUT` and `EXPIRED` from clock, stock and an explicit demo claim-window policy.
+- [x] Define precedence: **expired window → EXPIRED**; otherwise **zero stock → LOOTED_OUT**; otherwise live/warmup by epoch. Document this decision.
+- [x] Display meaningful `dd:hh:mm:ss` or `hh:mm:ss` based on remaining time, with visible units and phase labels.
+- [x] Update live regions only for meaningful **phase changes**; do not announce each frame/second to screen readers.
+- [x] Add tests for boundary conditions (before, at, after epoch, zero stock, after claim window).
 - **Done when:** Phase messages are accessible, deterministic, and do not depend on browser tab activity.
 - **Commit:** `feat(hw3): add accessible airdrop phases and countdown UI`
 

@@ -5,7 +5,7 @@ import type {
 } from '../domain/pubg-vn-arena-contract';
 
 // Demo deadline: 15 minutes after page module initialization.
-const demoDropEpochMs = Date.now() + 15 * 60_000;
+const demoDropEpochMs = Date.now() - 60_000;
 
 export const demoDrops: readonly PubgCrateDrop[] = [
   {
